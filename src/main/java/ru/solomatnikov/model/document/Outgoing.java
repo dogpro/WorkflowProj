@@ -1,4 +1,4 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.model.document;
 /**
  * Класс нужен для описания Исходящего документа
  */

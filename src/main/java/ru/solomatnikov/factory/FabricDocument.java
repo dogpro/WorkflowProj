@@ -1,6 +1,10 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.factory;
 
 import ru.solomatnikov.exception.DocumentExistsException;
+import ru.solomatnikov.model.document.Document;
+import ru.solomatnikov.model.document.Incoming;
+import ru.solomatnikov.model.document.Task;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -8,24 +12,17 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.Date;
 
-public abstract class FabricDocument {
+public final class FabricDocument {
 
-    private static final Random RANDOM = new Random();
-    private static final List<String> AUTHOR_LIST = Arrays.asList("user1", "user2", "user3", "user4");
-    private static Map<Integer, String> documentIdMap = new HashMap<Integer, String>();
-    private static int counter = 0;
-    public static String id;
-    public static String author;
-
-    public String getId() {
-        return id;
-    }
-    public String getAuthor() {
-        return author;
-    }
+    private final Random RANDOM = new Random();
+    public final List<String> AUTHOR_LIST = Arrays.asList("user1", "user2", "user3", "user4");
+    private Map<Integer, String> documentIdMap = new HashMap<Integer, String>();
+    private int counter = 0;
+    public String id;
+    public String author;
 
     //Проверка присутствия идентификатора документа в списке докумиентов
-    private static boolean isIdExits(String id) {
+    private  boolean isIdExits(String id) {
         return (documentIdMap.containsValue(id));
     }
 
@@ -35,7 +32,7 @@ public abstract class FabricDocument {
      * @return Документ
      * @throws DocumentExistsException Исключение на случай создания документа с не укникальным идентификатором
      */
-    public static Document getDocument(Class clazz) throws DocumentExistsException {
+    public Document getDocument(Class clazz) throws DocumentExistsException {
         Document document;
 
         //Проверка переданного класса

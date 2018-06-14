@@ -1,4 +1,6 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.factory;
+
+import ru.solomatnikov.model.document.Document;
 
 /**
  * Абстрактный класс для создания общего метода получения документа

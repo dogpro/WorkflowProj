@@ -1,4 +1,4 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.model.document;
 
 import java.util.Date;
 

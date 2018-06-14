@@ -1,4 +1,7 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.factory;
+
+import ru.solomatnikov.model.document.Document;
+import ru.solomatnikov.model.document.Task;
 
 import java.util.Arrays;
 import java.util.Date;
