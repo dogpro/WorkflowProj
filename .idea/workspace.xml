@@ -2,10 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="150e0531-6cb5-4dca-907b-cd4ac377b957" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/misc.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConsoleModel.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/Program.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/exception/DocumentExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/interfaces/Storable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/Creator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/Document.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/FabricDocument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/Incoming.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/IncomingCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/Outgoing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/OutgoingCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/Task.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/solomatnikov/model/TaskCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/Program$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/Program.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/exception/DocumentExistsException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/interfaces/Storable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/Creator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/Document.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/FabricDocument.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/Incoming.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/IncomingCreator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/Outgoing.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/OutgoingCreator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/Task.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/ru/solomatnikov/model/TaskCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleModel/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleModel/ConsoleModel/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleModel/target/classes/Document.class" beforeDir="false" />
@@ -63,6 +92,32 @@
             <path>
               <item name="ConsoleModel" type="b2602c69:ProjectViewProjectNode" />
               <item name="ConsoleModel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConsoleModel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConsoleModel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConsoleModel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConsoleModel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConsoleModel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConsoleModel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConsoleModel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConsoleModel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="solomatnikov" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -142,12 +197,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528958519733</updated>
-      <workItem from="1528958521243" duration="287000" />
+      <workItem from="1528958521243" duration="792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="287000" />
+    <option name="totallyTimeSpent" value="792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
