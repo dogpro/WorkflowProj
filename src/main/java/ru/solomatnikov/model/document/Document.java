@@ -1,10 +1,8 @@
 package ru.solomatnikov.model.document;
-
 import ru.solomatnikov.interfaces.Storable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import ru.solomatnikov.utils.DateUtil;
+
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Класс нуден для описания документа
@@ -95,25 +93,11 @@ public abstract class Document implements Comparable<Document>, Storable {
             return dateDoc.compareTo(o.dateDoc);
         }
     }
-
-    /**
-     * Печать полей документа
-     * @return Вывод всех полей Документа вместе с типом этого документа
-     */
+    
     @Override
     public String toString() {
         return  " №" + idDoc +
-                " oт " + dateUtil(dateDoc) +
+                " oт " + DateUtil.dateUtil(dateDoc) +
                 ". " + nameDoc;
-    }
-
-    /**
-     * Метод, принимающий дату и возвращаюй ее в формате 01.01.2011
-     * @param date Дата
-     * @return Форматированная дата
-     */
-    private static String dateUtil(Date date){
-        DateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
-        return simpleDateFormat.format(date);
     }
 }

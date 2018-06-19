@@ -6,13 +6,18 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class test {
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) {
 
-            File file = new File("C:\\Users\\Student\\Desktop\\Persons.xml");
-            JAXBContext context = JAXBContext.newInstance(Person.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Person person = (Person) unmarshaller.unmarshal(file);
-            System.out.println(person);
+            try{
+                File file = new File("C:\\Users\\Student\\Desktop\\Persons.xml");
+                JAXBContext context = JAXBContext.newInstance(Person.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                Person person = (Person) unmarshaller.unmarshal(file);
+                System.out.println(person);
+            }
+            catch (Exception e){
+
+            }
 
     }
 }

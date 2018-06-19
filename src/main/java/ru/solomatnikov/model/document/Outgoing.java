@@ -6,18 +6,18 @@ public class Outgoing extends Document {
     /**
      * Установка адресата
      */
-    private String addresName;
+    private String addressName;
     /**
      * Установка способа доставки
      */
     private String delivery;
 
-    public String getAddresName() {
-        return addresName;
+    public String getAddressName() {
+        return addressName;
     }
 
-    public void setAddresName(String addresName) {
-        this.addresName = addresName;
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public String getDelivery() {
@@ -28,10 +28,6 @@ public class Outgoing extends Document {
         this.delivery = delivery;
     }
 
-    /**
-     * Печать полей документа
-     * @return Вывод всех полей Документа вместе с типом этого документа
-     */
     @Override
     public String toString() {
         return "Исходящий" + super.toString();

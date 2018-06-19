@@ -13,7 +13,7 @@ public class Incoming extends Document {
     /**
      *Установка имени получателя
      */
-    private String adresName;
+    private String addressName;
     /**
      *Установка номера отправления
      */
@@ -31,12 +31,12 @@ public class Incoming extends Document {
         this.senderName = senderName;
     }
 
-    public String getAdresName() {
-        return adresName;
+    public String getAddressName() {
+        return addressName;
     }
 
-    public void setAdresName(String adresName) {
-        this.adresName = adresName;
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public String getSendNumreg() {
@@ -55,10 +55,6 @@ public class Incoming extends Document {
         this.sendDate = sendDate;
     }
 
-    /**
-     * Печать полей документа
-     * @return Вывод всех полей Документа вместе с типом этого документа
-     */
     @Override
     public String toString() {
         return "Входящий" + super.toString();

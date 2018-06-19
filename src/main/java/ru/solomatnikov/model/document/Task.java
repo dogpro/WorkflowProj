@@ -67,10 +67,6 @@ public class Task extends Document {
         this.controlAssig = controlAssig;
     }
 
-    /**
-     * Печать полей документа
-     * @return Вывод всех полей Документа вместе с типом этого документа
-     */
     @Override
     public String toString() {
         return "Поручение" + super.toString();
