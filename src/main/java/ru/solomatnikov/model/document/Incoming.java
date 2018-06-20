@@ -1,5 +1,7 @@
 package ru.solomatnikov.model.document;
 
+import ru.solomatnikov.model.Person;
+
 import java.util.Date;
 
 /**
@@ -9,11 +11,11 @@ public class Incoming extends Document {
     /**
      *Установка имени отправителя
      */
-    private String senderName;
+    private Person senderName;
     /**
      *Установка имени получателя
      */
-    private String addressName;
+    private Person addressName;
     /**
      *Установка номера отправления
      */
@@ -23,19 +25,19 @@ public class Incoming extends Document {
      */
     private Date sendDate;
 
-    public String getSenderName() {
+    public Person getSenderName() {
         return senderName;
     }
 
-    public void setSenderName(String senderName) {
+    public void setSenderName(Person senderName) {
         this.senderName = senderName;
     }
 
-    public String getAddressName() {
+    public Person getAddressName() {
         return addressName;
     }
 
-    public void setAddressName(String addressName) {
+    public void setAddressName(Person addressName) {
         this.addressName = addressName;
     }
 

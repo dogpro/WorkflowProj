@@ -1,5 +1,6 @@
 package ru.solomatnikov.model.document;
 import ru.solomatnikov.interfaces.Storable;
+import ru.solomatnikov.model.Person;
 import ru.solomatnikov.utils.DateUtil;
 
 import java.util.Date;
@@ -31,7 +32,7 @@ public abstract class Document implements Comparable<Document>, Storable {
     /**
      * Установка автора документа
      */
-    private String authorDoc;
+    private Person authorDoc;
 
     public Document() { }
 
@@ -75,11 +76,11 @@ public abstract class Document implements Comparable<Document>, Storable {
         this.dateDoc = dateDoc;
     }
 
-    public String getAuthorDoc() {
+    public Person getAuthorDoc() {
         return authorDoc;
     }
 
-    public void setAuthorDoc(String authorDoc) {
+    public void setAuthorDoc(Person authorDoc) {
         this.authorDoc = authorDoc;
     }
 

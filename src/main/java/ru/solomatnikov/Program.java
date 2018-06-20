@@ -55,17 +55,17 @@ public class Program {
                 document = DocumentFactory.getDocument(type);
                 //Добавление документа в отдельный список для демонстрации сортировки
                 listDocumentToSort.add(document);
-                System.out.println("Документ №" + document.getIdDoc() + " от " + document.getAuthorDoc() + ": добавлен!");
+                System.out.println("Документ №" + document.getIdDoc() + " от " + document.getAuthorDoc().getName() + ": добавлен!");
 
                 //Проверка на существование автора документа и добавление его в отчете
-                if (!reportMap.containsKey(document.getAuthorDoc())){
-                    reportMap.put(document.getAuthorDoc(), new TreeSet<>());
+                if (!reportMap.containsKey(document.getAuthorDoc().getName())){
+                    reportMap.put(document.getAuthorDoc().getName(), new TreeSet<>());
                 }
-                reportMap.get(document.getAuthorDoc()).add(document);
+                reportMap.get(document.getAuthorDoc().getName()).add(document);
 
             } catch (DocumentExistsException ok) {
                 assert document != null;
-                System.out.println("Документ №" + document.getIdDoc() + " от " + document.getAuthorDoc() + ": Document Exits Exception");
+                System.out.println("Документ №" + document.getIdDoc() + " от " + document.getAuthorDoc().getName() + ": Document Exits Exception");
             }
         }
 

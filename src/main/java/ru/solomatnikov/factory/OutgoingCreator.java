@@ -1,5 +1,6 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.model.Person;
 import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
@@ -17,8 +18,8 @@ public class OutgoingCreator extends Creator<Outgoing> {
     @Override
     public Outgoing getDocument() {
         Outgoing document = super.getDocument();
-
-        String deliveryAndAddressName = AUTHOR_LIST.get(RANDOM.nextInt(AUTHOR_LIST.size()));
+        Config config = getDateBaseFromXML("C:\\Users\\Student\\Desktop\\Persons.xml", Person.class);
+        Person deliveryAndAddressName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
 
         //Создание объекта Исходящие заполнение полей объекта
         document.setAddressName(deliveryAndAddressName);
