@@ -1,6 +1,6 @@
 package ru.solomatnikov.exception;
 
-public class DocumentExistsException extends Throwable {
+public class DocumentExistsException extends Exception {
     public DocumentExistsException(String message) {
         super(message);
     }

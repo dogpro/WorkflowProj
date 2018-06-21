@@ -2,6 +2,7 @@ package ru.solomatnikov.factory;
 
 import ru.solomatnikov.Program;
 import ru.solomatnikov.exception.DocumentExistsException;
+import ru.solomatnikov.exception.FileNotFoundException;
 import ru.solomatnikov.model.Person;
 import ru.solomatnikov.model.document.Document;
 
@@ -34,14 +35,17 @@ public abstract class Factory<T extends Document> {
      * @param clazz параметр, задающий класс для созданного объекта
      * @return список полученных объектов
      */
-    protected Config getDateBaseFromXML(String fileName, Class clazz){
+    protected Config getDateBaseFromXML(String fileName, Class clazz) {
         try {
 
             File file = new File(fileName);
-            JAXBContext context = JAXBContext.newInstance(Config.class, clazz);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Config config = (Config) unmarshaller.unmarshal(file);
-            return config;
+            if(!file.exists()){
+                throw new FileNotFoundException("File: src\\main\\resource\\Persons.xml not found");
+            }else {
+                JAXBContext context = JAXBContext.newInstance(Config.class, clazz);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                return (Config) unmarshaller.unmarshal(file);
+            }
         } catch (JAXBException ex) {
             ex.printStackTrace();
         }

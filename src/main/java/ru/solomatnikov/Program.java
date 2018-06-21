@@ -2,10 +2,7 @@ package ru.solomatnikov;
 
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.factory.DocumentFactory;
-import ru.solomatnikov.model.Person;
 import ru.solomatnikov.model.document.Document;
-import ru.solomatnikov.model.document.Incoming;
-import ru.solomatnikov.model.document.Outgoing;
 import ru.solomatnikov.model.document.Task;
 
 import java.util.*;
@@ -71,9 +68,9 @@ public class Program {
 
                     System.out.println("Документ №" + document.getId() + " от " + document.getAuthor().getShortName() + ": добавлен!");
                 }
-            } catch (DocumentExistsException ok) {
+            } catch (DocumentExistsException dEX) {
                 //Вывод полученного документа на экран в отфарматированном виде
-                System.out.println(ok.getMessage());
+                System.out.println(dEX.getMessage());
             }
         }
 
