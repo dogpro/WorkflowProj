@@ -25,7 +25,7 @@ public class test {
 //        customer.setId("1");
 //        ((Person) customer).setName("1");
 //        ((Person) customer).setSurname("1");
-//        ((Person) customer).setOtchestvo("1");
+//        ((Person) customer).setLastName("1");
 //        ((Person) customer).setPost("1");
 
 //        try {

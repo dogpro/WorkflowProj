@@ -20,40 +20,47 @@ public abstract class Creator<T extends Document> {
      * Создание общего метода получения документа
      */
     protected final Random RANDOM = new Random();
-    protected final List<String> EXECUTOR_LIST = Arrays.asList("executor1","executor2","executor3","executor4");
+    protected final List<String> EXECUTORS_LIST = Arrays.asList("executor1","executor2","executor3","executor4");
     protected final List<String> CONTROL_ASSIGN_LIST = Arrays.asList("Да", "Нет");
 
     protected abstract T initDocument();
 
-    protected Config getDateBaseFromXML(String xml, Class clazz){
+    /**
+     * Метод, с помощью которого просиходит получение данные из xml
+     * и запись этих данных в поля объекта
+     * @param fileName параметр, указывающий путь к файлу
+     * @param clazz параметр, задающий класс для созданного объекта
+     * @return список полученных объектов
+     */
+    protected Config getDateBaseFromXML(String fileName, Class clazz){
         //
         try {
-            File file = new File(xml);
+            File file = new File(fileName);
             JAXBContext context = JAXBContext.newInstance(Config.class, clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             Config config = (Config) unmarshaller.unmarshal(file);
             return config;
-            //config.getPersonList().forEach(System.out::println);
         } catch (JAXBException ex) {
             ex.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Метод заполняюший поля документа
+     * @return готовый документ
+     */
     public T getDocument(){
         T document = initDocument();
         Config config = getDateBaseFromXML("C:\\Users\\Student\\Desktop\\Persons.xml", Person.class);
         String id = String.valueOf(RANDOM.nextInt(10) + 1);
         Person author = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
-        //String author = AUTHOR_LIST.get(RANDOM.nextInt(AUTHOR_LIST.size()));
 
         //Заполнение общих полей документа
-        document.setIdDoc(id);
-        document.setNameDoc("Название документа");
-        document.setTextDoc("Текст документа...");
-        document.setRegnumDoc((long) (RANDOM.nextInt(10000)+1));
-        document.setDateDoc(new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong())));
-        document.setAuthorDoc(author);
+        document.setIdDocument(id);
+        document.setRegNumDocument((long) (RANDOM.nextInt(10000)+1));
+        document.setCreationDate(new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong())));
+        document.setAuthorDocument(author);
 
         return document;
     }

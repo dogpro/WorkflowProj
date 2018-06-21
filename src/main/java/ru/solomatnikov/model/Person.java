@@ -2,14 +2,13 @@ package ru.solomatnikov.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * Класс для определения персонала
  */
 @XmlRootElement(name ="Person")
-public class Person extends Staff {
+public class Person extends Staff implements Comparable<Person> {
     /**
      * Установка фамилии
      */
@@ -21,7 +20,7 @@ public class Person extends Staff {
     /**
      * Установка отчества
      */
-    private String otchestvo;
+    private String lastName;
     /**
      * Установка должности
      */
@@ -43,12 +42,12 @@ public class Person extends Staff {
         this.name = name;
     }
 
-    public String getOtchestvo() {
-        return otchestvo;
+    public String getLastName() {
+        return lastName;
     }
     @XmlElement
-    public void setOtchestvo(String otchestvo) {
-        this.otchestvo = otchestvo;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPost() {
@@ -64,7 +63,23 @@ public class Person extends Staff {
         return super.toString() +
                 "surname= " + surname + ' ' +
                 " name= " + name + ' ' +
-                " otchestvo= " + otchestvo + ' ' +
+                " lastName= " + lastName + ' ' +
                 " post= " + post;
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return 0;
+    }
+
+    public String getShortName() {
+        StringBuilder shortName = new StringBuilder();
+        shortName
+                .append(surname != null ? surname : "")
+                .append(" ")
+                .append(name != null ? name : "")
+                .append(" ")
+                .append(lastName != null ? lastName : "");
+        return shortName.toString();
     }
 }

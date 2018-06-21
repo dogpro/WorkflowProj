@@ -1,13 +1,7 @@
 package ru.solomatnikov.factory;
 
 import ru.solomatnikov.model.Person;
-import ru.solomatnikov.model.document.Document;
-import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public class OutgoingCreator extends Creator<Outgoing> {
 
@@ -22,6 +16,8 @@ public class OutgoingCreator extends Creator<Outgoing> {
         Person deliveryAndAddressName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
 
         //Создание объекта Исходящие заполнение полей объекта
+        document.setNameDocument("Входящий документ");
+        document.setTextDocument("Этот документ - Входящий");
         document.setAddressName(deliveryAndAddressName);
         document.setDelivery(deliveryAndAddressName);
 

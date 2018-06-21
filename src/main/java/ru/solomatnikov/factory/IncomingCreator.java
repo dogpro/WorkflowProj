@@ -1,13 +1,9 @@
 package ru.solomatnikov.factory;
 
 import ru.solomatnikov.model.Person;
-import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.model.document.Incoming;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 public class IncomingCreator extends Creator<Incoming> {
 
@@ -24,10 +20,12 @@ public class IncomingCreator extends Creator<Incoming> {
        Date date = new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong()));
 
        //Создание объекта Исходящие заполнение полей объекта
-       document.setSenderName(senderAndAddressName);
-       document.setAddressName(senderAndAddressName);
-       document.setSendNumreg(String.valueOf(RANDOM.nextInt(100000000)+1));
-       document.setSendDate(date);
+       document.setNameDocument("Исходий документ");
+       document.setTextDocument("Этот документ - Исходящий");
+       document.setSender(senderAndAddressName);
+       document.setAddressee(senderAndAddressName);
+       document.setNumRegSender(String.valueOf(RANDOM.nextInt(100000000)+1));
+       document.setSenderDate(date);
 
        return document;
    }

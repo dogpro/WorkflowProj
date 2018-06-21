@@ -9,52 +9,52 @@ import java.util.Date;
  */
 public class Incoming extends Document {
     /**
-     *Установка имени отправителя
+     * Создание поля для имени отправителя
      */
-    private Person senderName;
+    private Person sender;
     /**
-     *Установка имени получателя
+     * Создание поля для имени получателя
      */
-    private Person addressName;
+    private Person addressee;
     /**
-     *Установка номера отправления
+     * Создание поля для номера отправления
      */
-    private String sendNumreg;
+    private String numRegSender;
     /**
-     *Установка даты отправления
+     * Создание поля для даты отправления
      */
-    private Date sendDate;
+    private Date senderDate;
 
-    public Person getSenderName() {
-        return senderName;
+    public Person getSender() {
+        return sender;
     }
 
-    public void setSenderName(Person senderName) {
-        this.senderName = senderName;
+    public void setSender(Person sender) {
+        this.sender = sender;
     }
 
-    public Person getAddressName() {
-        return addressName;
+    public Person getAddressee() {
+        return addressee;
     }
 
-    public void setAddressName(Person addressName) {
-        this.addressName = addressName;
+    public void setAddressee(Person addressee) {
+        this.addressee = addressee;
     }
 
-    public String getSendNumreg() {
-        return sendNumreg;
+    public String getNumRegSender() {
+        return numRegSender;
     }
 
-    public void setSendNumreg(String sendNumreg) {
-        this.sendNumreg = sendNumreg;
+    public void setNumRegSender(String numRegSender) {
+        this.numRegSender = numRegSender;
     }
 
-    public Date getSendDate() {
-        return sendDate;
+    public Date getSenderDate() {
+        return senderDate;
     }
 
-    public void setSendDate(Date sendDate) {
-        this.sendDate = sendDate;
+    public void setSenderDate(Date senderDate) {
+        this.senderDate = senderDate;
     }
 
     @Override

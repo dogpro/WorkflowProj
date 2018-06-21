@@ -1,7 +1,7 @@
 package ru.solomatnikov.model.document;
 import ru.solomatnikov.interfaces.Storable;
 import ru.solomatnikov.model.Person;
-import ru.solomatnikov.utils.DateUtil;
+import ru.solomatnikov.utils.DateUtils;
 
 import java.util.Date;
 
@@ -10,95 +10,95 @@ import java.util.Date;
  */
 public abstract class Document implements Comparable<Document>, Storable {
     /**
-     * Установка номера документа
+     * Создание поля для номера документа
      */
-    private String idDoc;
+    private String idDocument;
     /**
-     * Установка имени документа
+     * Создание поля для имени документа
      */
-    private String nameDoc;
+    private String nameDocument;
     /**
-     * Установка текста документа
+     * Создание поля для текста документа
      */
-    private String textDoc;
+    private String textDocument;
     /**
-     * Установка номера регистрации
+     * Создание поля для номера регистрации
      */
-    private Long regnumDoc;
+    private Long regNumDocument;
     /**
-     * Установка даты создания документа
+     * Создание поля для даты создания документа
      */
-    private Date dateDoc;
+    private Date creationDate;
     /**
-     * Установка автора документа
+     * Создание поля для автора документа
      */
-    private Person authorDoc;
+    private Person authorDocument;
 
     public Document() { }
 
-    public String getIdDoc() {
-        return idDoc;
+    public String getIdDocument() {
+        return idDocument;
     }
 
-    public void setIdDoc(String idDoc) {
-        this.idDoc = idDoc;
+    public void setIdDocument(String idDocument) {
+        this.idDocument = idDocument;
     }
 
-    public String getNameDoc() {
-        return nameDoc;
+    public String getNameDocument() {
+        return nameDocument;
     }
 
-    public void setNameDoc(String nameDoc) {
-        this.nameDoc = nameDoc;
+    public void setNameDocument(String nameDocument) {
+        this.nameDocument = nameDocument;
     }
 
-    public String getTextDoc() {
-        return textDoc;
+    public String getTextDocument() {
+        return textDocument;
     }
 
-    public void setTextDoc(String textDoc) {
-        this.textDoc = textDoc;
+    public void setTextDocument(String textDocument) {
+        this.textDocument = textDocument;
     }
 
-    public Long getRegnumDoc() {
-        return regnumDoc;
+    public Long getRegNumDocument() {
+        return regNumDocument;
     }
 
-    public void setRegnumDoc(Long regnumDoc) {
-        this.regnumDoc = regnumDoc;
+    public void setRegNumDocument(Long regNumDocument) {
+        this.regNumDocument = regNumDocument;
     }
 
-    public Date getDateDoc() {
-        return dateDoc;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setDateDoc(Date dateDoc) {
-        this.dateDoc = dateDoc;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Person getAuthorDoc() {
-        return authorDoc;
+    public Person getAuthorDocument() {
+        return authorDocument;
     }
 
-    public void setAuthorDoc(Person authorDoc) {
-        this.authorDoc = authorDoc;
+    public void setAuthorDocument(Person authorDocument) {
+        this.authorDocument = authorDocument;
     }
 
     public int compareTo(Document o) {
         //Условие на проверку равенства дат
-        if (dateDoc.compareTo(o.dateDoc) == 0) {
+        if (creationDate.compareTo(o.creationDate) == 0) {
             //Если равны, сортировать по регистрационному номеру
-            return regnumDoc.compareTo(o.regnumDoc);
+            return regNumDocument.compareTo(o.regNumDocument);
         } else {
             //Если не равны, сортировать по дате
-            return dateDoc.compareTo(o.dateDoc);
+            return creationDate.compareTo(o.creationDate);
         }
     }
     
     @Override
     public String toString() {
-        return  " №" + idDoc +
-                " oт " + DateUtil.dateUtil(dateDoc) +
-                ". " + nameDoc;
+        return  " №" + idDocument +
+                " oт " + DateUtils.formatDate(creationDate) +
+                ". " + nameDocument;
     }
 }
