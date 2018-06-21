@@ -12,19 +12,19 @@ public abstract class Document implements Comparable<Document>, Storable {
     /**
      * Создание поля для номера документа
      */
-    private String idDocument;
+    private Long id;
     /**
      * Создание поля для имени документа
      */
-    private String nameDocument;
+    private String name;
     /**
      * Создание поля для текста документа
      */
-    private String textDocument;
+    private String text;
     /**
      * Создание поля для номера регистрации
      */
-    private Long regNumDocument;
+    private Long registrationNumber;
     /**
      * Создание поля для даты создания документа
      */
@@ -32,73 +32,73 @@ public abstract class Document implements Comparable<Document>, Storable {
     /**
      * Создание поля для автора документа
      */
-    private Person authorDocument;
+    private Person author;
 
     public Document() { }
 
-    public String getIdDocument() {
-        return idDocument;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdDocument(String idDocument) {
-        this.idDocument = idDocument;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNameDocument() {
-        return nameDocument;
+    public String getName() {
+        return name;
     }
 
-    public void setNameDocument(String nameDocument) {
-        this.nameDocument = nameDocument;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTextDocument() {
-        return textDocument;
+    public String getText() {
+        return text;
     }
 
-    public void setTextDocument(String textDocument) {
-        this.textDocument = textDocument;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Long getRegNumDocument() {
-        return regNumDocument;
+    public Long getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setRegNumDocument(Long regNumDocument) {
-        this.regNumDocument = regNumDocument;
+    public void setRegistrationNumber(Long registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(Date creationDateT) {
+        this.creationDate = creationDateT;
     }
 
-    public Person getAuthorDocument() {
-        return authorDocument;
+    public Person getAuthor() {
+        return author;
     }
 
-    public void setAuthorDocument(Person authorDocument) {
-        this.authorDocument = authorDocument;
+    public void setAuthor(Person author) {
+        this.author = author;
     }
 
-    public int compareTo(Document o) {
+    public int compareTo(Document document) {
         //Условие на проверку равенства дат
-        if (creationDate.compareTo(o.creationDate) == 0) {
+        if (creationDate.compareTo(document.creationDate) == 0) {
             //Если равны, сортировать по регистрационному номеру
-            return regNumDocument.compareTo(o.regNumDocument);
+            return registrationNumber.compareTo(document.registrationNumber);
         } else {
             //Если не равны, сортировать по дате
-            return creationDate.compareTo(o.creationDate);
+            return creationDate.compareTo(document.creationDate);
         }
     }
     
     @Override
     public String toString() {
-        return  " №" + idDocument +
+        return  " №" + id +
                 " oт " + DateUtils.formatDate(creationDate) +
-                ". " + nameDocument;
+                ". " + name;
     }
 }

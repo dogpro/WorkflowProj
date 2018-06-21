@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public abstract class Staff {
     /**
-     * Установка идентификатора
+     * Создание поля для идентификатора
      */
     private String id;
 

@@ -10,19 +10,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name ="Person")
 public class Person extends Staff implements Comparable<Person> {
     /**
-     * Установка фамилии
+     * Создание поля для фамилии
      */
     private String surname;
     /**
-     * Установка имени
+     * Создание поля для имени
      */
-    private String name;
+    private String firstName;
     /**
-     * Установка отчества
+     * Создание поля для отчества
      */
     private String lastName;
     /**
-     * Установка должности
+     * Создание поля для должности
      */
     private String post;
 
@@ -34,12 +34,12 @@ public class Person extends Staff implements Comparable<Person> {
         this.surname = surname;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
     @XmlElement
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -62,7 +62,7 @@ public class Person extends Staff implements Comparable<Person> {
     public String toString() {
         return super.toString() +
                 "surname= " + surname + ' ' +
-                " name= " + name + ' ' +
+                " firstName= " + firstName + ' ' +
                 " lastName= " + lastName + ' ' +
                 " post= " + post;
     }
@@ -77,7 +77,7 @@ public class Person extends Staff implements Comparable<Person> {
         shortName
                 .append(surname != null ? surname : "")
                 .append(" ")
-                .append(name != null ? name : "")
+                .append(firstName != null ? firstName : "")
                 .append(" ")
                 .append(lastName != null ? lastName : "");
         return shortName.toString();

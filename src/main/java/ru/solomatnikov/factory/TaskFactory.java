@@ -1,37 +1,36 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.document.Task;
 
 import java.util.Date;
 
-public class TaskCreator extends Creator<Task> {
+public class TaskFactory extends Factory<Task> {
 
     /**
      * Метод для завполнения полей документа рандомнынми значениями
      * @return документ типа Задача
      */
     @Override
-    public Task getDocument() {
+    public Task getDocument() throws DocumentExistsException {
         Task document = super.getDocument();
-
         String executor = EXECUTORS_LIST.get(RANDOM.nextInt(EXECUTORS_LIST.size()));
         String controlAssign = CONTROL_ASSIGN_LIST.get(RANDOM.nextInt(CONTROL_ASSIGN_LIST.size()));
-        Date date = new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong()));
 
         //Создание объекта Задача заполнение полей объекта
-        document.setNameDocument("Документ Поручение");
-        document.setTextDocument("Этот документ - Поручение");
-        document.setDateTask(date);
-        document.setDatePerform(RANDOM.nextInt(10)+1);
+        document.setName("Документ Поручение");
+        document.setText("Этот документ - Поручение");
+        document.setCreationDateT(new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong())));
+        document.setPerformDate(RANDOM.nextInt(10)+1);
         document.setExecutor(executor);
         document.setControl(RANDOM.nextInt(10)+1);
-        document.setControlAssig(controlAssign);
+        document.setControlAssign(controlAssign);
 
         return document;
     }
 
     @Override
-    protected Task initDocument() {
+    protected Task initialization() {
         return new Task();
     }
 }

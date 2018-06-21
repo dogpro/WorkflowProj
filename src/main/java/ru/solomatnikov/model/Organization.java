@@ -5,51 +5,51 @@ package ru.solomatnikov.model;
  */
 public class Organization extends Staff {
     /**
-     * Установка полного имении организации
+     * Создание поля для полного имении организации
      */
-    private String fullNameOrganization;
+    private String fullName;
     /**
-     * Установка краткого имени организации
+     * Создание поля для краткого имени организации
      */
-    private String shortNameOrganization;
+    private String shortName;
     /**
-     * Установка руководителя организации
+     * Создание поля для руководителя организации
      */
-    private String managerOrganization;
+    private String manager;
     /**
-     * Установка номера организации
+     * Создание поля для номера организации
      */
-    private String callPhoneOrganization;
+    private String callPhone;
 
-    public String getFullNameOrganization() {
-        return fullNameOrganization;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullNameOrganization(String fullNameOrganization) {
-        this.fullNameOrganization = fullNameOrganization;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getShortNameOrganization() {
-        return shortNameOrganization;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setShortNameOrganization(String shortNameOrganization) {
-        this.shortNameOrganization = shortNameOrganization;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getManagerOrganization() {
-        return managerOrganization;
+    public String getManager() {
+        return manager;
     }
 
-    public void setManagerOrganization(String managerOrganization) {
-        this.managerOrganization = managerOrganization;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
-    public String getCallPhoneOrganization() {
-        return callPhoneOrganization;
+    public String getCallPhone() {
+        return callPhone;
     }
 
-    public void setCallPhoneOrganization(String callPhoneOrganization) {
-        this.callPhoneOrganization = callPhoneOrganization;
+    public void setCallPhone(String callPhone) {
+        this.callPhone = callPhone;
     }
 }

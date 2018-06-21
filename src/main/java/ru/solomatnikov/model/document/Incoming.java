@@ -19,7 +19,7 @@ public class Incoming extends Document {
     /**
      * Создание поля для номера отправления
      */
-    private String numRegSender;
+    private String registrationNumberSender;
     /**
      * Создание поля для даты отправления
      */
@@ -41,12 +41,12 @@ public class Incoming extends Document {
         this.addressee = addressee;
     }
 
-    public String getNumRegSender() {
-        return numRegSender;
+    public String getRegistrationNumberSender() {
+        return registrationNumberSender;
     }
 
-    public void setNumRegSender(String numRegSender) {
-        this.numRegSender = numRegSender;
+    public void setRegistrationNumberSender(String registrationNumberSender) {
+        this.registrationNumberSender = registrationNumberSender;
     }
 
     public Date getSenderDate() {

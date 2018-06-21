@@ -5,51 +5,51 @@ package ru.solomatnikov.model;
  */
 public class Department extends Staff {
     /**
-     * Установка полного наименования депортамента
+     * Создание поля для полного наименования депортамента
      */
-    private String fullNameDepartament;
+    private String fullName;
     /**
-     * Установка краткого наименования депортамента
+     * Создание поля для краткого наименования депортамента
      */
-    private String shortNameDepartament;
+    private String shortName;
     /**
-     * Установка руководителя депортамента
+     * Создание поля для руководителя депортамента
      */
-    private String menagerDepartament;
+    private String menager;
     /**
-     * Устнановка контактного номера депортамента
+     * Создание поля для контактного номера депортамента
      */
-    private String callPhoneDepartament;
+    private String callPhone;
 
-    public String getFullNameDepartament() {
-        return fullNameDepartament;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullNameDepartament(String fullNameDepartament) {
-        this.fullNameDepartament = fullNameDepartament;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getShortNameDepartament() {
-        return shortNameDepartament;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setShortNameDepartament(String shortNameDepartament) {
-        this.shortNameDepartament = shortNameDepartament;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getMenagerDepartament() {
-        return menagerDepartament;
+    public String getMenager() {
+        return menager;
     }
 
-    public void setMenagerDepartament(String menagerDepartament) {
-        this.menagerDepartament = menagerDepartament;
+    public void setMenager(String menager) {
+        this.menager = menager;
     }
 
-    public String getCallPhoneDepartament() {
-        return callPhoneDepartament;
+    public String getCallPhone() {
+        return callPhone;
     }
 
-    public void setCallPhoneDepartament(String callPhoneDepartament) {
-        this.callPhoneDepartament = callPhoneDepartament;
+    public void setCallPhone(String callPhone) {
+        this.callPhone = callPhone;
     }
 }

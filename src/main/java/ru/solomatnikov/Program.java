@@ -8,17 +8,12 @@ import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
 import ru.solomatnikov.model.document.Task;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Random;
-import java.util.TreeSet;
-import java.util.Collections;
+import java.util.*;
 
 public class Program {
 
+    public static final Map<Integer, Long> documentIdMap = new HashMap<>();
+    public static int counter = 0;
     /**
      * Метод, выполняющий сортировку полученных документов и выводящий результат на экран
      */
@@ -35,24 +30,27 @@ public class Program {
     /**
      * Метод, выводящий документы, сгрупиированные по автору, на экран
      */
-    private static void printReport(Map<Person, TreeSet<Document>> reportMap ) {
+    private static void printReport(Map<String, TreeSet<Document>> reportMap ) {
+
+
         System.out.println("\n----------------------------------");
         System.out.println("\t\tОтчет:");
 
-        for (Map.Entry<Person, TreeSet<Document>> entry : reportMap.entrySet()) {
-            Person key = entry.getKey();
+        for (Map.Entry<String, TreeSet<Document>> entry : reportMap.entrySet()) {
+            String key = entry.getKey();
             TreeSet<Document> value = entry.getValue();
             System.out.println(key + ":\n" + value.toString().replaceAll("^\\[|]$", " ")
                     .replaceAll(",", "\n"));
         }
     }
 
+
     public static void main(String[] args) {
         List<Document> listDocumentToSort = new ArrayList<>();
-        Map<Person, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
-        List<Class> typeDocument = Arrays.asList(Incoming.class, Outgoing.class, Task.class);
+        Map<String, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
+        List<Class> typeDocument = Arrays.asList( Task.class);
 
-        Document document = null;
+        Document document;
 
         System.out.println("\t\tДобавление документов:");
 
@@ -62,20 +60,20 @@ public class Program {
             try {
                 //Получение в переменную document нового документа
                 document = DocumentFactory.getDocument(type);
-                //Добавление документа в отдельный список для демонстрации сортировки
-                listDocumentToSort.add(document);
-                //Вывод полученного документа на экран в отфарматированном виде
-                System.out.println("Документ №" + document.getIdDocument() + " от " + document.getAuthorDocument().getShortName() + ": добавлен!");
 
-                //Проверка на существование автора документа и добавление его в отчете
-                if (!reportOnAuthor.containsKey(document.getAuthorDocument())){
-                    reportOnAuthor.put(document.getAuthorDocument(), new TreeSet<>());
+                if(document != null){
+                    if (!reportOnAuthor.containsKey(document.getAuthor().getShortName())){
+                        reportOnAuthor.put(document.getAuthor().getShortName(), new TreeSet<>());
+                    }
+                    reportOnAuthor.get(document.getAuthor().getShortName()).add(document);
+
+                    listDocumentToSort.add(document);
+
+                    System.out.println("Документ №" + document.getId() + " от " + document.getAuthor().getShortName() + ": добавлен!");
                 }
-                reportOnAuthor.get(document.getAuthorDocument()).add(document);
-
             } catch (DocumentExistsException ok) {
                 //Вывод полученного документа на экран в отфарматированном виде
-                System.out.println("Документ №" + document.getIdDocument() + " от " + document.getAuthorDocument().getShortName() + ": Document Exits Exception");
+                System.out.println(ok.getMessage());
             }
         }
 

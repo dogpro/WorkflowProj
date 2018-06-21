@@ -9,11 +9,11 @@ public class Task extends Document {
     /**
      * Создание поля для даты создания задачи
      */
-    private Date dateTask;
+    private Date creationDateT;
     /**
      * Создание поля для срока выполнения задачи
      */
-    private int datePerform;
+    private int performDate;
     /**
      * Создание поля для ответственного исполнителя
      */
@@ -25,22 +25,22 @@ public class Task extends Document {
     /**
      * Создание поля для контроллера поручения
      */
-    private String controlAssig;
+    private String controlAssign;
 
-    public Date getDateTask() {
-        return dateTask;
+    public Date getCreationDateT() {
+        return creationDateT;
     }
 
-    public void setDateTask(Date dateTask) {
-        this.dateTask = dateTask;
+    public void setCreationDateT(Date creationDateT) {
+        this.creationDateT = creationDateT;
     }
 
-    public int getDatePerform() {
-        return datePerform;
+    public int getPerformDate() {
+        return performDate;
     }
 
-    public void setDatePerform(int datePerform) {
-        this.datePerform = datePerform;
+    public void setPerformDate(int performDate) {
+        this.performDate = performDate;
     }
 
     public String getExecutor() {
@@ -59,12 +59,12 @@ public class Task extends Document {
         this.control = control;
     }
 
-    public String getControlAssig() {
-        return controlAssig;
+    public String getControlAssign() {
+        return controlAssign;
     }
 
-    public void setControlAssig(String controlAssig) {
-        this.controlAssig = controlAssig;
+    public void setControlAssign(String controlAssign) {
+        this.controlAssign = controlAssign;
     }
 
     @Override
