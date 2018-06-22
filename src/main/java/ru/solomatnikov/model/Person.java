@@ -10,19 +10,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name ="Person")
 public class Person extends Staff implements Comparable<Person> {
     /**
-     * Создание поля для фамилии
+     * Фамилия
      */
     private String surname;
     /**
-     * Создание поля для имени
+     * Имя
      */
     private String firstName;
     /**
-     * Создание поля для отчества
+     * Отчество
      */
     private String lastName;
     /**
-     * Создание поля для должности
+     * Должность
      */
     private String post;
 

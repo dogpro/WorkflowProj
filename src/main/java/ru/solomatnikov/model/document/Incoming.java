@@ -9,19 +9,19 @@ import java.util.Date;
  */
 public class Incoming extends Document {
     /**
-     * Создание поля для имени отправителя
+     * Имя отправителя
      */
     private Person sender;
     /**
-     * Создание поля для имени получателя
+     * Имя получателя
      */
     private Person addressee;
     /**
-     * Создание поля для номера отправления
+     * Номер отправления
      */
     private String registrationNumberSender;
     /**
-     * Создание поля для даты отправления
+     * Дата отправления
      */
     private Date senderDate;
 

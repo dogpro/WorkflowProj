@@ -7,23 +7,23 @@ import java.util.Date;
  */
 public class Task extends Document {
     /**
-     * Создание поля для даты создания задачи
+     * Дата создания задачи
      */
     private Date creationDateT;
     /**
-     * Создание поля для срока выполнения задачи
+     * Срок исполнения задачи
      */
     private int performDate;
     /**
-     * Создание поля для ответственного исполнителя
+     * Ответственный исполнитель
      */
     private String executor;
     /**
-     * Создание поля для признака контроля
+     * Признак контроля
      */
     private int control;
     /**
-     * Создание поля для контроллера поручения
+     * Контроль поручения
      */
     private String controlAssign;
 

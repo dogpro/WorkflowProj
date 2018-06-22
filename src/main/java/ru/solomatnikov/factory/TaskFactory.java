@@ -30,7 +30,7 @@ public class TaskFactory extends Factory<Task> {
     }
 
     @Override
-    protected Task initialization() {
+    protected Task initialize() {
         return new Task();
     }
 }

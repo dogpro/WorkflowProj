@@ -26,7 +26,7 @@ public class OutgoingFactory extends Factory<Outgoing> {
     }
 
     @Override
-    protected Outgoing initialization() {
+    protected Outgoing initialize() {
         return new Outgoing();
     }
 }

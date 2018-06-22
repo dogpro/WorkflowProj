@@ -19,7 +19,7 @@ public class IncomingFactory extends Factory<Incoming> {
        Person addresseeName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
 
        //Создание объекта Исходящие заполнение полей объекта
-       document.setName("Исходий документ");
+       document.setName("Исходящий документ");
        document.setText("Этот документ - Исходящий");
        document.setSender(senderName);
        document.setAddressee(addresseeName);
@@ -30,7 +30,7 @@ public class IncomingFactory extends Factory<Incoming> {
    }
 
     @Override
-    protected Incoming initialization() {
+    protected Incoming initialize() {
         return new Incoming();
     }
 }

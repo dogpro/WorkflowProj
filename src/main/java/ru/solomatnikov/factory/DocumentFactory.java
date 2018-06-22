@@ -11,6 +11,12 @@ import java.util.HashMap;
 
 public final class DocumentFactory {
 
+    private static Map<Class, Factory> documentFactoryMap = new HashMap<Class, Factory>() {{
+        put(Task.class, new TaskFactory());
+        put(Incoming.class, new IncomingFactory());
+        put(Outgoing.class, new OutgoingFactory());
+    }};
+
     private DocumentFactory(){}
 
     /**
@@ -20,12 +26,6 @@ public final class DocumentFactory {
      * @throws DocumentExistsException Ошибка на случай создания документа с уже существующим идентификатором
      */
     public static Document getDocument(Class clazz) throws DocumentExistsException {
-        Map<Class, Factory> documentFactoryMap = new HashMap<Class, Factory>() {{
-            put(Task.class, new TaskFactory());
-            put(Incoming.class, new IncomingFactory());
-            put(Outgoing.class, new OutgoingFactory());
-        }};
-
         return documentFactoryMap.get(clazz).getDocument();
     }
 }

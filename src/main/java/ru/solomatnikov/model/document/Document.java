@@ -10,27 +10,27 @@ import java.util.Date;
  */
 public abstract class Document implements Comparable<Document>, Storable {
     /**
-     * Создание поля для номера документа
+     * Номер документа
      */
     private Long id;
     /**
-     * Создание поля для имени документа
+     * Имя документа
      */
     private String name;
     /**
-     * Создание поля для текста документа
+     * Текс документа
      */
     private String text;
     /**
-     * Создание поля для номера регистрации
+     * Номер регистрации
      */
     private Long registrationNumber;
     /**
-     * Создание поля для даты создания документа
+     * Дата создания документа
      */
     private Date creationDate;
     /**
-     * Создание поля для автора документа
+     * Автор документа
      */
     private Person author;
 
@@ -85,8 +85,9 @@ public abstract class Document implements Comparable<Document>, Storable {
     }
 
     public int compareTo(Document document) {
+        int compareToDate = creationDate.compareTo(document.creationDate);
         //Условие на проверку равенства дат
-        if (creationDate.compareTo(document.creationDate) == 0) {
+        if (compareToDate == 0) {
             //Если равны, сортировать по регистрационному номеру
             return registrationNumber.compareTo(document.registrationNumber);
         } else {

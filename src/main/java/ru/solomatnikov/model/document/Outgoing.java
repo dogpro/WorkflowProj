@@ -7,11 +7,11 @@ import ru.solomatnikov.model.Person;
  */
 public class Outgoing extends Document {
     /**
-     * Создание поля для адресата
+     *  Адресат
      */
     private Person addressName;
     /**
-     * Создание поля для способа доставки
+     * Способ доставки
      */
     private Person delivery;
 

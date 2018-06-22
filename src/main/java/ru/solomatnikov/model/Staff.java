@@ -1,15 +1,12 @@
 package ru.solomatnikov.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Класс для реализации элементов организационной структуры
  */
 
 public abstract class Staff {
     /**
-     * Создание поля для идентификатора
+     * Идентификатор
      */
     private String id;
 

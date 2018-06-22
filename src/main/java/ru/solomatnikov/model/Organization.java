@@ -5,19 +5,19 @@ package ru.solomatnikov.model;
  */
 public class Organization extends Staff {
     /**
-     * Создание поля для полного имении организации
+     * Полное наименование организации
      */
     private String fullName;
     /**
-     * Создание поля для краткого имени организации
+     * Краткое наименование организации
      */
     private String shortName;
     /**
-     * Создание поля для руководителя организации
+     * Руководитель организации
      */
     private String manager;
     /**
-     * Создание поля для номера организации
+     * Контактный номер организации
      */
     private String callPhone;
 
