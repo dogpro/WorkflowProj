@@ -36,7 +36,6 @@ public class Program {
     private static void printSortDocument(List<Document> documentList) {
         System.out.println("-----------------------------------");
         System.out.println("\t\tСортировка:");
-
         Collections.sort(documentList);
         for (Document document : documentList) {
             logger.debug(String.valueOf(document));
@@ -44,7 +43,8 @@ public class Program {
     }
 
     /**
-     * Метод, выводящий документы, сгрупиированные по автору, на экран
+     * Метод, выводящий документы, сгрупиированные по автору, в консоль
+     * и записывает их в JSON файл
      */
     private static void printReport(Map<String, TreeSet<Document>> reportMap ) {
         System.out.println("\n----------------------------------");
@@ -53,20 +53,19 @@ public class Program {
         for (Map.Entry<String, TreeSet<Document>> entry : reportMap.entrySet()) {
             String key = entry.getKey();
             TreeSet<Document> documents = entry.getValue();
-            String fileName = null;
+
             try {
-                fileName = (Program.class.getProtectionDomain().getCodeSource().getLocation()
+                //Создание файла с именем автора
+                String pathToFile = (Program.class.getProtectionDomain().getCodeSource().getLocation()
                         .toURI().getPath() + key + ".json");
-            } catch (URISyntaxException e) {
-                logger.error(e.getMessage());
-            }
-
-            try(FileWriter writer = new FileWriter(fileName)) {
+                //Запись документов в созданный файл
+                FileWriter writer = new FileWriter(pathToFile);
                 writer.write(gson.toJson(documents) + "\n\n");
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (URISyntaxException | IOException ex) {
+                //Исключение на случай ошибки при создании файла или при записи в него
+                logger.error(ex.getMessage());
             }
-
+            //Вывод отчет в консоль
             logger.info(key + ":\n" + documents.toString().replaceAll("^\\[|]$", " ")
                     .replaceAll(",", "\n"));
         }
