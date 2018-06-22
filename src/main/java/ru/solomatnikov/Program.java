@@ -38,7 +38,7 @@ public class Program {
         System.out.println("\t\tСортировка:");
         Collections.sort(documentList);
         for (Document document : documentList) {
-            logger.debug(String.valueOf(document));
+            logger.debug(document.toString());
         }
     }
 
