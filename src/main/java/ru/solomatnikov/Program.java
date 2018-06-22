@@ -1,5 +1,9 @@
 package ru.solomatnikov;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.factory.DocumentFactory;
 import ru.solomatnikov.model.document.Document;
@@ -7,6 +11,9 @@ import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
 import ru.solomatnikov.model.document.Task;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +25,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Program {
-
+    private static final Logger logger = LoggerFactory.getLogger(Program.class);
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static String fileName;
     public static final Map<Integer, Long> documentIdMap = new HashMap<>();
     public static int counter = 0;
@@ -31,7 +39,7 @@ public class Program {
 
         Collections.sort(documentList);
         for (Document document : documentList) {
-            System.out.println(document);
+            logger.debug(String.valueOf(document));
         }
     }
 
@@ -39,15 +47,27 @@ public class Program {
      * Метод, выводящий документы, сгрупиированные по автору, на экран
      */
     private static void printReport(Map<String, TreeSet<Document>> reportMap ) {
-
-
         System.out.println("\n----------------------------------");
         System.out.println("\t\tОтчет:");
 
         for (Map.Entry<String, TreeSet<Document>> entry : reportMap.entrySet()) {
             String key = entry.getKey();
-            TreeSet<Document> value = entry.getValue();
-            System.out.println(key + ":\n" + value.toString().replaceAll("^\\[|]$", " ")
+            TreeSet<Document> documents = entry.getValue();
+            String fileName = null;
+            try {
+                fileName = (Program.class.getProtectionDomain().getCodeSource().getLocation()
+                        .toURI().getPath() + key + ".json");
+            } catch (URISyntaxException e) {
+                logger.error(e.getMessage());
+            }
+
+            try(FileWriter writer = new FileWriter(fileName)) {
+                writer.write(gson.toJson(documents) + "\n\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            logger.info(key + ":\n" + documents.toString().replaceAll("^\\[|]$", " ")
                     .replaceAll(",", "\n"));
         }
     }
@@ -78,12 +98,10 @@ public class Program {
 
                     //Добавлени документов в лист для демонстрации сортировки
                     listDocumentToSort.add(document);
-
-                    System.out.println("Документ №" + document.getId() + " от " + author + ": добавлен!");
+                    logger.debug("Документ №{} от {} добавлен!", document.getId(), author);
                 }
             } catch (DocumentExistsException dEX) {
-                //Вывод сообщения об ошибке на случай повторяющегося идентификатора
-                System.out.println(dEX.getMessage());
+                logger.debug(dEX.getMessage());
             }
         }
 
