@@ -28,7 +28,7 @@ public class Program {
     private static final Logger logger = LoggerFactory.getLogger(Program.class);
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static String fileName;
-    public static final Map<Integer, Long> documentIdMap = new HashMap<>();
+    public static final Map<Integer, Long> documentIdMap = new HashMap<Integer, Long>();
     public static int counter = 0;
     /**
      * Метод, выполняющий сортировку полученных документов и выводящий результат на экран
