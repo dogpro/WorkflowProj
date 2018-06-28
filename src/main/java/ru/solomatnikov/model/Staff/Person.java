@@ -1,8 +1,7 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.model.Staff;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
 
 /**
  * Класс для определения персонала
@@ -81,5 +80,10 @@ public class Person extends Staff implements Comparable<Person> {
                 .append(" ")
                 .append(lastName != null ? lastName : "");
         return shortName.toString();
+    }
+
+    @Override
+    public String getStoreName() {
+        return "Person";
     }
 }

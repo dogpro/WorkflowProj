@@ -1,21 +1,23 @@
-package ru.solomatnikov.model;
+package ru.solomatnikov.model.Staff;
+
+import ru.solomatnikov.model.interfaces.Storable;
 
 /**
  * Класс для реализации элементов организационной структуры
  */
 
-public abstract class Staff {
+public abstract class Staff implements Storable {
     /**
      * Идентификатор
      */
-    private String id;
+    private Long id;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

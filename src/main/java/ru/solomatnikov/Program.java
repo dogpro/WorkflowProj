@@ -27,11 +27,12 @@ import java.util.TreeSet;
 public class Program {
     private static final Logger logger = LoggerFactory.getLogger(Program.class);
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static String fileName;
     public static final Map<Integer, Long> documentIdMap = new HashMap<Integer, Long>();
     public static int counter = 0;
+
     /**
      * Метод, выполняющий сортировку полученных документов и выводящий результат на экран
+     * @param documentList Список всех документов
      */
     private static void printSortDocument(List<Document> documentList) {
         System.out.println("-----------------------------------");
@@ -43,25 +44,26 @@ public class Program {
     }
 
     /**
-     * Метод, выводящий документы, сгрупиированные по автору, в консоль
-     * и записывает их в JSON файл
+     * Метод, выводящий документы, сгрупиированные по автору, в консоль и записывает их в JSON файл
+     * @param reportMap Спсиок документов, распределенный по авторам
+     * @throws URISyntaxException Исключение на случай ошибки в пути к файлу
      */
-    private static void printReport(Map<String, TreeSet<Document>> reportMap ) {
+    private static void printReport(Map<String, TreeSet<Document>> reportMap ) throws URISyntaxException {
         System.out.println("\n----------------------------------");
         System.out.println("\t\tОтчет:");
 
         for (Map.Entry<String, TreeSet<Document>> entry : reportMap.entrySet()) {
             String key = entry.getKey();
             TreeSet<Document> documents = entry.getValue();
+            //Создание файла с именем автора
+            String pathToFile = (Program.class.getProtectionDomain().getCodeSource().getLocation()
+                    .toURI().getPath() + key + ".json");
 
-            try {
-                //Создание файла с именем автора
-                String pathToFile = (Program.class.getProtectionDomain().getCodeSource().getLocation()
-                        .toURI().getPath() + key + ".json");
+            try (FileWriter writer = new FileWriter(pathToFile)){
                 //Запись документов в созданный файл
-                FileWriter writer = new FileWriter(pathToFile);
                 writer.write(gson.toJson(documents) + "\n\n");
-            } catch (URISyntaxException | IOException ex) {
+
+            } catch (IOException ex) {
                 //Исключение на случай ошибки при создании файла или при записи в него
                 logger.error(ex.getMessage());
             }
@@ -72,8 +74,7 @@ public class Program {
     }
 
 
-    public static void main(String[] args) {
-        fileName = args[0];
+    public static void main(String[] args) throws URISyntaxException, IOException {
         List<Document> listDocumentToSort = new ArrayList<>();
         Map<String, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
         List<Class> typeDocument = Arrays.asList(Incoming.class, Outgoing.class, Task.class);

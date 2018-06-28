@@ -1,10 +1,12 @@
 package ru.solomatnikov.model.document;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Класс нужен для описания Задачи.
  */
+@XmlRootElement(name ="Task")
 public class Task extends Document {
     /**
      * Дата создания задачи
@@ -70,5 +72,10 @@ public class Task extends Document {
     @Override
     public String toString() {
         return "Поручение" + super.toString();
+    }
+
+    @Override
+    public String getStoreName() {
+        return "Task";
     }
 }

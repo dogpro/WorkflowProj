@@ -1,12 +1,14 @@
 package ru.solomatnikov.model.document;
 
-import ru.solomatnikov.model.Person;
+import ru.solomatnikov.model.Staff.Person;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Класс нужен для описания Входящего документа.
  */
+@XmlRootElement(name ="Incoming")
 public class Incoming extends Document {
     /**
      * Имя отправителя
@@ -60,5 +62,10 @@ public class Incoming extends Document {
     @Override
     public String toString() {
         return "Входящий" + super.toString();
+    }
+
+    @Override
+    public String getStoreName() {
+        return "Incoming";
     }
 }

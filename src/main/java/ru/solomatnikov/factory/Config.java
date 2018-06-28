@@ -1,6 +1,6 @@
 package ru.solomatnikov.factory;
 
-import ru.solomatnikov.model.Person;
+import ru.solomatnikov.model.Staff.Person;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +14,7 @@ public class Config {
 
     /**
      * Метод для получения персон из xml в лист
-     * @return Лист персон
+     * @return Список персон
      */
     public List<Person> getPersonList() {
         return personList;

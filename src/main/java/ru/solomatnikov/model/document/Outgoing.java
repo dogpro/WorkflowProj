@@ -1,10 +1,13 @@
 package ru.solomatnikov.model.document;
 
-import ru.solomatnikov.model.Person;
+import ru.solomatnikov.model.Staff.Person;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Класс нужен для описания Исходящего документа
  */
+@XmlRootElement(name ="Outgoing")
 public class Outgoing extends Document {
     /**
      *  Адресат
@@ -34,5 +37,10 @@ public class Outgoing extends Document {
     @Override
     public String toString() {
         return "Исходящий" + super.toString();
+    }
+
+    @Override
+    public String getStoreName() {
+        return "Outgoing";
     }
 }

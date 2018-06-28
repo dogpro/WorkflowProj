@@ -1,13 +1,16 @@
 package ru.solomatnikov.model.document;
-import ru.solomatnikov.interfaces.Storable;
-import ru.solomatnikov.model.Person;
+import ru.solomatnikov.model.interfaces.Storable;
+import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.utils.DateUtils;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Класс нуден для описания документа
  */
+@XmlRootElement(name ="Document")
 public abstract class Document implements Comparable<Document>, Storable {
     /**
      * Номер документа
@@ -100,6 +103,6 @@ public abstract class Document implements Comparable<Document>, Storable {
     public String toString() {
         return  " №" + id +
                 " oт " + DateUtils.formatDate(creationDate) +
-                ". " + name;
+                ". " + name + " a = " + author;
     }
 }
