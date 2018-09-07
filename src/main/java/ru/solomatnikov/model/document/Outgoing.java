@@ -36,7 +36,10 @@ public class Outgoing extends Document {
 
     @Override
     public String toString() {
-        return "Исходящий" + super.toString();
+        return "Входящий: " +
+                " Адресат: " + addressName +
+                ", Способ доставки: " + delivery +
+                 super.toString();
     }
 
     @Override

@@ -99,10 +99,19 @@ public abstract class Document implements Comparable<Document>, Storable {
         }
     }
     
-    @Override
+    /*@Override
     public String toString() {
         return  " №" + id +
                 " oт " + DateUtils.formatDate(creationDate) +
-                ". " + name + " a = " + author;
+                ". " + name + "  = " + author;
+    }*/
+
+    @Override
+    public String toString() {
+        return  ", Название: " + name + '\'' +
+                ", Текст: " + text + '\'' +
+                ", Регистрационный номер: " + registrationNumber +
+                ", Дата создания: " + creationDate +
+                ", Автор документа: " + author;
     }
 }

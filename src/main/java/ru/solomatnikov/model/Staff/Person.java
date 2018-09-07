@@ -60,10 +60,10 @@ public class Person extends Staff implements Comparable<Person> {
     @Override
     public String toString() {
         return super.toString() +
-                "surname= " + surname + ' ' +
-                " firstName= " + firstName + ' ' +
-                " lastName= " + lastName + ' ' +
-                " post= " + post;
+                " Фамилия: " + surname +
+                ", Имя: " + firstName +
+                ", Отчество: " + lastName +
+                ", Должность: " + post;
     }
 
     @Override

@@ -23,6 +23,6 @@ public abstract class Staff implements Storable {
 
     @Override
     public String toString() {
-        return "№=" + id + " ";
+        return "№" + id + " ";
     }
 }

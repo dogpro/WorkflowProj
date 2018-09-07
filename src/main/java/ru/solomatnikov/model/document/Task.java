@@ -71,7 +71,12 @@ public class Task extends Document {
 
     @Override
     public String toString() {
-        return "Поручение" + super.toString();
+        return "Поручение: " +
+                " Дата создания: " + creationDateT +
+                ", Дата отправки: " + performDate +
+                ", Исполнитель: " + executor + '\'' +
+                ", Признак контрольности: " + control +
+                ", Контроллер поручечния: " + controlAssign + '\'' + super.toString();
     }
 
     @Override

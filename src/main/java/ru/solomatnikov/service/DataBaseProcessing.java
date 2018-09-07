@@ -25,7 +25,6 @@ public class DataBaseProcessing {
         }
     }
 
-
     /**
      * Метод, осуществляющий подключение к базе данных
      * @return Подключение
@@ -84,7 +83,6 @@ public class DataBaseProcessing {
 
             Config config = new ServerProcessing().getDateBaseFromXML(Person.class);
 
-            List<Long> personIdList = new ArrayList<>();
             PreparedStatement preparedStatement = null;
 
             for (Person person : config.getPersonList()) {
@@ -105,14 +103,6 @@ public class DataBaseProcessing {
 
         }
     }
-
-    /*Statement stat = connection.createStatement();
-            stat.executeUpdate("DROP TABLE " + tableName);
-            if (!isTableExist(connection, tableName))
-            stat.execute("CREATE TABLE " + tableName + "(id BIGINT, surname VARCHAR(50), firstName VARCHAR(50), " +
-            "lastName VARCHAR(50), post VARCHAR(50))");
-
-            stat.close();*/
 
     /**
      * Метод, выполняющий операцию SELECT

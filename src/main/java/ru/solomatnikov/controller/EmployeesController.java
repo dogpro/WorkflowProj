@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeSet;
 
 @Path("/employees")
@@ -26,7 +25,7 @@ public class EmployeesController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> getAuthor() throws IOException {
+    public static List<Person> getAuthor() throws IOException {
         Config config = new ServerProcessing().getDateBaseFromXML(Person.class);
         return config.getPersonList();
     }

@@ -3,4 +3,35 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Author</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.AllAuthorsOnGetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Author</servlet-name>
+        <url-pattern>/Author</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Documents</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.AllDocumentsAuthorOnGetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Documents</servlet-name>
+        <url-pattern>/Documents</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DocumentField</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.DocumentAuthorOnGetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DocumentField</servlet-name>
+        <url-pattern>/DocumentField</url-pattern>
+    </servlet-mapping>
 </web-app>

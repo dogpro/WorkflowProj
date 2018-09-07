@@ -22,8 +22,8 @@ public class IncomingFactory extends Factory<Incoming> {
        Person addresseeName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
 
        //Создание объекта Исходящие заполнение полей объекта
-       document.setName("Исходящий документ");
-       document.setText("Этот документ - Исходящий");
+       document.setName("Входящий документ");
+       document.setText("Этот документ - Входящий");
        document.setSender(senderName);
        document.setAddressee(addresseeName);
        document.setRegistrationNumberSender(String.valueOf(RANDOM.nextInt(100000000)+1));

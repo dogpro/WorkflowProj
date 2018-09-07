@@ -21,8 +21,8 @@ public class OutgoingFactory extends Factory<Outgoing> {
         Person addresseeName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
 
         //Создание объекта Исходящие заполнение полей объекта
-        document.setName("Входящий документ");
-        document.setText("Этот документ - Входящий");
+        document.setName("Исходящий документ");
+        document.setText("Этот документ - Исходящий");
         document.setAddressName(deliveryName);
         document.setDelivery(addresseeName);
 

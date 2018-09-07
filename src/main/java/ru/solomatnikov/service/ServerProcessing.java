@@ -15,16 +15,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ServerProcessing {
     private static final Logger logger = LoggerFactory.getLogger(ServerProcessing.class);
     public static final Map<Long, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
+    public static final Set<Document> doc = new TreeSet<>();
 
     /**
      * Метод создания документов
@@ -57,7 +53,7 @@ public class ServerProcessing {
      *      * и запись этих данных в поля объекта
      * @param clazz Параметр, задающий класс для созданного объекта
      * @return Список полученных объектов
-     * @throws IOException сключение на случай ошибки пути к XML файлу
+     * @throws IOException исключение на случай ошибки пути к XML файлу
      */
     public Config getDateBaseFromXML(Class clazz) throws IOException {
 

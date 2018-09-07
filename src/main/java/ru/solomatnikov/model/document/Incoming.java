@@ -61,7 +61,12 @@ public class Incoming extends Document {
 
     @Override
     public String toString() {
-        return "Входящий" + super.toString();
+        return "Исходящий: " +
+                " Отправитель: " + sender +
+                ", Получатель: " + addressee +
+                ", Регистрационный номер отправителя: " + registrationNumberSender + '\'' +
+                ", Дата отправки: " + senderDate +
+                  super.toString();
     }
 
     @Override
