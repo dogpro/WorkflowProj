@@ -1,6 +1,5 @@
 package ru.solomatnikov.factory;
 
-import ru.solomatnikov.Program;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.model.document.Document;
@@ -9,7 +8,9 @@ import ru.solomatnikov.service.ServerProcessing;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -23,7 +24,10 @@ public abstract class Factory<T extends Document> {
     protected final Random RANDOM = new Random();
     protected final List<String> EXECUTORS_LIST = Arrays.asList("executor1","executor2","executor3","executor4");
     protected final List<String> CONTROL_ASSIGN_LIST = Arrays.asList("Да", "Нет");
+    protected static final Map<Integer, Long> documentIdMap = new HashMap<Integer, Long>();
+    protected static int counter = 0;
     public static Config config;
+
 
 
     /**
@@ -38,7 +42,7 @@ public abstract class Factory<T extends Document> {
      * @return уже существует / не существует
      */
     private static boolean isIdExits(Long id) {
-        return (Program.documentIdMap.containsValue(id));
+        return (documentIdMap.containsValue(id));
     }
 
     /**
@@ -54,7 +58,7 @@ public abstract class Factory<T extends Document> {
             //Если идентификатор уже существует - вернуть ошибку
             throw new DocumentExistsException("Документ №" + id + " Document Exits Exception");
         } else {
-            Program.documentIdMap.put(Program.counter++, id);
+            documentIdMap.put(counter++, id);
 
             T document = initialize();
             config = new ServerProcessing().getDateBaseFromXML(Person.class);

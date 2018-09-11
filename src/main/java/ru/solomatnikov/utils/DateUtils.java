@@ -1,6 +1,5 @@
 package ru.solomatnikov.utils;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -12,6 +11,6 @@ public class DateUtils {
      * @return Форматированная дата
      */
     public static String formatDate(Date date){
-        return new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(date);
+        return new SimpleDateFormat("dd.MM.yyyy").format(date);
     }
 }

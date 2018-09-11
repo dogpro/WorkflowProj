@@ -9,21 +9,27 @@ import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
 import ru.solomatnikov.model.document.Task;
+import ru.solomatnikov.servlets.AllDocumentsAuthorOnGetServlet;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class ServerProcessing {
     private static final Logger logger = LoggerFactory.getLogger(ServerProcessing.class);
-    public static final Map<Long, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
-    public static final Set<Document> doc = new TreeSet<>();
+    private static final Map<Long, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
 
     /**
      * Метод создания документов
+     *
      * @throws IOException Исключение на случай ошибки пути к XML файлу
      */
     public void getDocument() throws IOException {
@@ -50,14 +56,15 @@ public class ServerProcessing {
 
     /**
      * Метод, с помощью которого просиходит получение данные из xml
-     *      * и запись этих данных в поля объекта
+     * * и запись этих данных в поля объекта
+     *
      * @param clazz Параметр, задающий класс для созданного объекта
      * @return Список полученных объектов
      * @throws IOException исключение на случай ошибки пути к XML файлу
      */
     public Config getDateBaseFromXML(Class clazz) throws IOException {
 
-        try(InputStream inputStream = ServerProcessing.class.getClassLoader().getResourceAsStream("Persons.xml")) {
+        try (InputStream inputStream = ServerProcessing.class.getClassLoader().getResourceAsStream("Persons.xml")) {
             JAXBContext context = JAXBContext.newInstance(Config.class, clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             return (Config) unmarshaller.unmarshal(inputStream);
@@ -69,10 +76,11 @@ public class ServerProcessing {
 
     /**
      * Получение списка документов по идентификатору автора
+     *
      * @param id Идентификатор автора
      * @return список документов
      */
-    public TreeSet<Document> getDocumentOnAuthor(Long id){
+    public TreeSet<Document> getDocumentsByAuthor(Long id) {
         for (Map.Entry<Long, TreeSet<Document>> entry : ServerProcessing.reportOnAuthor.entrySet()) {
             Long key = entry.getKey();
             TreeSet<Document> documents = entry.getValue();
@@ -80,4 +88,19 @@ public class ServerProcessing {
         }
         return null;
     }
+
+    /**
+     * Получение документа из списка по его идентификатору
+     * @param id Идентификатор документа
+     * @return Документ
+     */
+    public Document getDocumentByAuthor(Long id) {
+        for (Document document : AllDocumentsAuthorOnGetServlet.documents) {
+            if (document.getId().equals(id)) {
+                return document;
+            }
+        }
+        return null;
+    }
+
 }

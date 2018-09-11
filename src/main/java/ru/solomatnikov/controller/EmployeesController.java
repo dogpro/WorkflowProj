@@ -3,7 +3,6 @@ package ru.solomatnikov.controller;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.model.document.Document;
-import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.service.ServerProcessing;
 
 import javax.ws.rs.GET;
@@ -39,7 +38,7 @@ public class EmployeesController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_XML)
     public TreeSet<Document> getDocumentByAuthor(@PathParam("id") Long id) {
-        return new ServerProcessing().getDocumentOnAuthor(id);
+        return new ServerProcessing().getDocumentsByAuthor(id);
     }
 }
 

@@ -8,6 +8,13 @@
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <servlet>
+        <servlet-name>InitializationServlet</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.InitializationServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <servlet>
         <servlet-name>Author</servlet-name>
         <servlet-class>ru.solomatnikov.servlets.AllAuthorsOnGetServlet</servlet-class>

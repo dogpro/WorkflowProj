@@ -4,7 +4,6 @@ import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.utils.DateUtils;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -98,20 +97,13 @@ public abstract class Document implements Comparable<Document>, Storable {
             return creationDate.compareTo(document.creationDate);
         }
     }
-    
-    /*@Override
-    public String toString() {
-        return  " №" + id +
-                " oт " + DateUtils.formatDate(creationDate) +
-                ". " + name + "  = " + author;
-    }*/
 
     @Override
     public String toString() {
-        return  ", Название: " + name + '\'' +
-                ", Текст: " + text + '\'' +
+        return  ", Название: " + name +
+                ", Текст: " + text +
                 ", Регистрационный номер: " + registrationNumber +
-                ", Дата создания: " + creationDate +
+                ", Дата создания: " + DateUtils.formatDate(creationDate) +
                 ", Автор документа: " + author;
     }
 }

@@ -64,7 +64,7 @@ public class Incoming extends Document {
         return "Исходящий: " +
                 " Отправитель: " + sender +
                 ", Получатель: " + addressee +
-                ", Регистрационный номер отправителя: " + registrationNumberSender + '\'' +
+                ", Регистрационный номер отправителя: " + registrationNumberSender +
                 ", Дата отправки: " + senderDate +
                   super.toString();
     }

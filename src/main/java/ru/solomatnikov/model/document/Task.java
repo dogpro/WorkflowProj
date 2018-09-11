@@ -74,9 +74,9 @@ public class Task extends Document {
         return "Поручение: " +
                 " Дата создания: " + creationDateT +
                 ", Дата отправки: " + performDate +
-                ", Исполнитель: " + executor + '\'' +
+                ", Исполнитель: " + executor +
                 ", Признак контрольности: " + control +
-                ", Контроллер поручечния: " + controlAssign + '\'' + super.toString();
+                ", Контроллер поручечния: " + controlAssign + super.toString();
     }
 
     @Override

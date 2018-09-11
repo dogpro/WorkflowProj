@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
 import java.io.IOException;
-import java.util.List;
 
 public class AllAuthorsOnGetServlet extends HttpServlet {
 
@@ -28,6 +28,7 @@ public class AllAuthorsOnGetServlet extends HttpServlet {
      * @throws ServletException Исключение на случай ошибки в выполнении сервлета
      * @throws IOException Исключение на случай ошибки при работе с файлом *.jsp
      */
+    @Context HttpServletRequest request;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -35,9 +36,8 @@ public class AllAuthorsOnGetServlet extends HttpServlet {
         serverProcessing.getDocument();
         //Генерация авторов из XML файла
         Config config = new ServerProcessing().getDateBaseFromXML(Person.class);
-        List<Person> persons = config.getPersonList();
 
-        request.setAttribute("persons", persons);
+        request.setAttribute("persons", config.getPersonList());
         request.getRequestDispatcher("/authors.jsp").forward(request, response);
     }
 }

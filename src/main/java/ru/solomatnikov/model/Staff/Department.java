@@ -19,7 +19,7 @@ public class Department extends Staff {
     /**
      * Руководитель депортамента
      */
-    private String menager;
+    private String manager;
     /**
      * Контактный номер депортамента
      */
@@ -41,13 +41,13 @@ public class Department extends Staff {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
-    public String getMenager() {
-        return menager;
+    public String getManager() {
+        return manager;
     }
 
     @XmlElement
-    public void setMenager(String menager) {
-        this.menager = menager;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
     public String getCallPhone() {
         return callPhone;

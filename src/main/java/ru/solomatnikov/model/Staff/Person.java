@@ -2,6 +2,7 @@ package ru.solomatnikov.model.Staff;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  * Класс для определения персонала
@@ -24,6 +25,30 @@ public class Person extends Staff implements Comparable<Person> {
      * Должность
      */
     private String post;
+    /**
+     * Фото
+     */
+    private String photo;
+    /**
+     * День рождения
+     */
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getSurname() {
         return surname;
