@@ -17,8 +17,8 @@ public class OutgoingFactory extends Factory<Outgoing> {
     @Override
     public Outgoing getDocument() throws DocumentExistsException, IOException {
         Outgoing document = super.getDocument();
-        Person deliveryName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
-        Person addresseeName = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
+        Person deliveryName = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
+        Person addresseeName = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
 
         //Создание объекта Исходящие заполнение полей объекта
         document.setName("Исходящий документ");

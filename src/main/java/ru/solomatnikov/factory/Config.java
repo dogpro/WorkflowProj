@@ -1,27 +1,20 @@
 package ru.solomatnikov.factory;
 
-import ru.solomatnikov.model.Staff.Person;
+import ru.solomatnikov.model.Staff.Staff;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAnyElement;
 import java.util.List;
 
-@XmlRootElement(name = "PersonList")
-public class Config {
+public class Config <T extends Staff>{
 
-    private List<Person> personList = new ArrayList<>();
 
-    /**
-     * Метод для получения персон из xml в лист
-     * @return Список персон
-     */
-    public List<Person> getPersonList() {
-        return personList;
+    private List<T> any;
+
+    public List<T> getAny() {
+        return any;
     }
-
-    @XmlElement(name="person")
-    public void setPersonList(List<Person> personList) {
-        this.personList = personList;
+    @XmlAnyElement(lax=true)
+    public void setAny(List<T> any) {
+        this.any = any;
     }
 }

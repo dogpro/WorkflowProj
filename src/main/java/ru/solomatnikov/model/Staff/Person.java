@@ -2,12 +2,13 @@ package ru.solomatnikov.model.Staff;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Класс для определения персонала
  */
-@XmlRootElement(name ="Person")
+@XmlType
+@XmlRootElement
 public class Person extends Staff implements Comparable<Person> {
     /**
      * Фамилия
@@ -32,23 +33,7 @@ public class Person extends Staff implements Comparable<Person> {
     /**
      * День рождения
      */
-    private Date birthday;
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+    private String birthday;
 
     public String getSurname() {
         return surname;
@@ -82,13 +67,32 @@ public class Person extends Staff implements Comparable<Person> {
         this.post = post;
     }
 
+
+    public String getBirthday() {
+        return birthday;
+    }
+    @XmlElement
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+    @XmlElement
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public String toString() {
         return super.toString() +
                 " Фамилия: " + surname +
                 ", Имя: " + firstName +
                 ", Отчество: " + lastName +
-                ", Должность: " + post;
+                ", Должность: " + post +
+                ", День рождения: " + birthday +
+                ", Фото: " + photo;
     }
 
     @Override

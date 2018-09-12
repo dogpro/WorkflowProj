@@ -16,6 +16,7 @@ public class DocumentAuthorOnGetServlet extends HttpServlet {
         super.doPost(request, response);
     }
 
+    @Context HttpServletRequest request;
     /**
      * Get запрос, возвращающий поля документа
      * @param request  Запрос
@@ -23,7 +24,6 @@ public class DocumentAuthorOnGetServlet extends HttpServlet {
      * @throws ServletException Исключение на случай ошибки в выполнении сервлета
      * @throws IOException Исключение на случай ошибки при работе с файлом *.jsp
      */
-    @Context HttpServletRequest request;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServerProcessing serverProcessing = new ServerProcessing();

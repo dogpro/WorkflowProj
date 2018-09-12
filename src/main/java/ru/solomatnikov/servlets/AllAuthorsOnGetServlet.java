@@ -21,6 +21,8 @@ public class AllAuthorsOnGetServlet extends HttpServlet {
         super.doPost(request, response);
     }
 
+
+    @Context HttpServletRequest request;
     /**
      * Get запрос, возвращающий список всех авторов
      * @param request Запрос
@@ -28,16 +30,15 @@ public class AllAuthorsOnGetServlet extends HttpServlet {
      * @throws ServletException Исключение на случай ошибки в выполнении сервлета
      * @throws IOException Исключение на случай ошибки при работе с файлом *.jsp
      */
-    @Context HttpServletRequest request;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //Генерация документов
         serverProcessing.getDocument();
         //Генерация авторов из XML файла
-        Config config = new ServerProcessing().getDateBaseFromXML(Person.class);
+        Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
 
-        request.setAttribute("persons", config.getPersonList());
+        request.setAttribute("persons", config.getAny());
         request.getRequestDispatcher("/authors.jsp").forward(request, response);
     }
 }

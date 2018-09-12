@@ -14,7 +14,7 @@
         <firstName>Andrew</firstName>
         <surname>Andreew</surname>
         <lastName>Andreewich</lastName>
-        <birthday>2.12.1978</birthday>
+        <birthday>11.01.1989</birthday>
         <post>post2</post>
         <photo>file</photo>
     </person>
@@ -23,7 +23,7 @@
         <firstName>Vlad</firstName>
         <surname>Vladov</surname>
         <lastName>Vladovich</lastName>
-        <birthday>24.05.1965</birthday>
+        <birthday>11.01.19895</birthday>
         <post>post3</post>
         <photo>file</photo>
     </person>
@@ -32,7 +32,7 @@
         <firstName>Oleg</firstName>
         <surname>Olegov</surname>
         <lastName>Olegovich</lastName>
-        <birthday>17.07.1977</birthday>
+        <birthday>11.01.1989</birthday>
         <post>post4</post>
         <photo>file</photo>
     </person>

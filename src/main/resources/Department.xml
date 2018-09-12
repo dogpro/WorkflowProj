@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DepartmentList>
+    <department>
+        <id>1</id>
+        <fullName>Department_1</fullName>
+        <shortName>D_1</shortName>
+        <manager>manager_1</manager>
+        <callPhone>454-11-11</callPhone>
+    </department>
+    <department>
+        <id>2</id>
+        <fullName>Department_2</fullName>
+        <shortName>D_2</shortName>
+        <manager>manager_2</manager>
+        <callPhone>543-32-12</callPhone>
+    </department>
+    <department>
+        <id>3</id>
+        <fullName>Department_3</fullName>
+        <shortName>D_3</shortName>
+        <manager>manager_3</manager>
+        <callPhone>123-45-67</callPhone>
+    </department>
+    <department>
+        <id>4</id>
+        <fullName>Department_4</fullName>
+        <shortName>D_4</shortName>
+        <manager>manager_4</manager>
+        <callPhone>987-65-43</callPhone>
+    </department>
+</DepartmentList>

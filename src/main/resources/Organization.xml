@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OrganizationList>
+    <organization>
+        <id>1</id>
+        <fullName>Organization_1</fullName>
+        <shortName>O_1</shortName>
+        <manager>manager_1</manager>
+        <callPhone>123-43-43</callPhone>
+    </organization>
+    <organization>
+        <id>2</id>
+        <fullName>Organization_2</fullName>
+        <shortName>O_2</shortName>
+        <manager>manager_2</manager>
+        <callPhone>321-32-32</callPhone>
+    </organization>
+    <organization>
+        <id>3</id>
+        <fullName>Organization_3</fullName>
+        <shortName>O_3</shortName>
+        <manager>manager_3</manager>
+        <callPhone>897-99-99</callPhone>
+    </organization>
+    <organization>
+        <id>4</id>
+        <fullName>Organization_4</fullName>
+        <shortName>O_4</shortName>
+        <manager>manager_4</manager>
+        <callPhone>210-10-10</callPhone>
+    </organization>
+</OrganizationList>

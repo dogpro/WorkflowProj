@@ -2,7 +2,6 @@ package ru.solomatnikov.controller;
 
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.model.Staff.Person;
-import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.service.ServerProcessing;
 
 import javax.ws.rs.GET;
@@ -11,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.time.Period;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -24,9 +24,9 @@ public class EmployeesController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public static List<Person> getAuthor() throws IOException {
-        Config config = new ServerProcessing().getDateBaseFromXML(Person.class);
-        return config.getPersonList();
+    public static List getAuthor() throws IOException {
+        Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
+        return config.getAny();
     }
 
     /**
@@ -37,7 +37,7 @@ public class EmployeesController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_XML)
-    public TreeSet<Document> getDocumentByAuthor(@PathParam("id") Long id) {
+    public TreeSet getDocumentByAuthor(@PathParam("id") Long id) {
         return new ServerProcessing().getDocumentsByAuthor(id);
     }
 }

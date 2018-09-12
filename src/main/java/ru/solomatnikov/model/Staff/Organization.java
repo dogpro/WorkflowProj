@@ -2,11 +2,13 @@ package ru.solomatnikov.model.Staff;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Класс для определения организаций
  */
-@XmlRootElement(name ="Organization")
+@XmlType
+@XmlRootElement
 public class Organization extends Staff {
     /**
      * Полное наименование организации
@@ -56,6 +58,15 @@ public class Organization extends Staff {
     @XmlElement
     public void setCallPhone(String callPhone) {
         this.callPhone = callPhone;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " Наименование: " + fullName +
+                ", Краткое наименование: " + shortName  +
+                ", Менеджер: " + manager +
+                ", Телефон: " + callPhone;
     }
 
     @Override

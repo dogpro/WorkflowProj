@@ -22,6 +22,7 @@ public class AllDocumentsAuthorOnGetServlet extends HttpServlet {
         super.doPost(request, response);
     }
 
+    @Context HttpServletRequest request;
     /**
      * Get запрос, возвращающий все документы конкретного автора по его ID
      * @param request Запрос
@@ -29,7 +30,6 @@ public class AllDocumentsAuthorOnGetServlet extends HttpServlet {
      * @throws ServletException Исключение на случай ошибки в выполнении сервлета
      * @throws IOException Исключение на случай ошибки при работе с файлом *.jsp
      */
-    @Context HttpServletRequest request;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServerProcessing serverProcessing = new ServerProcessing();

@@ -5,6 +5,10 @@ import org.slf4j.LoggerFactory;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.factory.DocumentFactory;
+import ru.solomatnikov.model.Staff.Department;
+import ru.solomatnikov.model.Staff.Organization;
+import ru.solomatnikov.model.Staff.Person;
+import ru.solomatnikov.model.Staff.Staff;
 import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.model.document.Incoming;
 import ru.solomatnikov.model.document.Outgoing;
@@ -14,6 +18,8 @@ import ru.solomatnikov.servlets.AllDocumentsAuthorOnGetServlet;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -23,7 +29,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class ServerProcessing {
+public class ServerProcessing <T extends Staff> {
     private static final Logger logger = LoggerFactory.getLogger(ServerProcessing.class);
     private static final Map<Long, TreeSet<Document>> reportOnAuthor = new TreeMap<>();
 
@@ -55,19 +61,17 @@ public class ServerProcessing {
     }
 
     /**
-     * Метод, с помощью которого просиходит получение данные из xml
-     * * и запись этих данных в поля объекта
-     *
-     * @param clazz Параметр, задающий класс для созданного объекта
-     * @return Список полученных объектов
-     * @throws IOException исключение на случай ошибки пути к XML файлу
+     * Метод для чтения данных из XML файла
+     * @param fileName Имя файла
+     * @return Лист значений из файла
+     * @throws IOException Икулючение на случай ошибки в работе с файлом
      */
-    public Config getDateBaseFromXML(Class clazz) throws IOException {
-
-        try (InputStream inputStream = ServerProcessing.class.getClassLoader().getResourceAsStream("Persons.xml")) {
-            JAXBContext context = JAXBContext.newInstance(Config.class, clazz);
+    public Config<T> getDataInDBFromXML(String fileName) throws IOException {
+        try (InputStream inputStream = ServerProcessing.class.getClassLoader().getResourceAsStream(fileName)) {
+            JAXBContext context = JAXBContext.newInstance(Config.class, Person.class, Department.class, Organization.class);
+            Source source = new StreamSource(inputStream);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            return (Config) unmarshaller.unmarshal(inputStream);
+            return (Config<T>) unmarshaller.unmarshal(source, Config.class).getValue();
         } catch (JAXBException ex) {
             ex.printStackTrace();
         }
@@ -76,7 +80,6 @@ public class ServerProcessing {
 
     /**
      * Получение списка документов по идентификатору автора
-     *
      * @param id Идентификатор автора
      * @return список документов
      */

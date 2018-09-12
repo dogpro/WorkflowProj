@@ -2,11 +2,13 @@ package ru.solomatnikov.model.Staff;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Класс для определения подразделений
  */
-@XmlRootElement(name ="Department")
+@XmlType
+@XmlRootElement
 public class Department extends Staff {
     /**
      * Полное наименование депортамента
@@ -20,6 +22,7 @@ public class Department extends Staff {
      * Руководитель депортамента
      */
     private String manager;
+
     /**
      * Контактный номер депортамента
      */
@@ -61,5 +64,15 @@ public class Department extends Staff {
     @Override
     public String getStoreName() {
         return "Department";
+    }
+
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " Наименование: " + fullName +
+                ", Краткое наименование: " + shortName  +
+                ", Менеджер: " + manager +
+                ", Телефон: " + callPhone;
     }
 }

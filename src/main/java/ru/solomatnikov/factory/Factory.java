@@ -26,7 +26,7 @@ public abstract class Factory<T extends Document> {
     protected final List<String> CONTROL_ASSIGN_LIST = Arrays.asList("Да", "Нет");
     protected static final Map<Integer, Long> documentIdMap = new HashMap<Integer, Long>();
     protected static int counter = 0;
-    public static Config config;
+    public static Config<Person> config;
 
 
 
@@ -61,8 +61,8 @@ public abstract class Factory<T extends Document> {
             documentIdMap.put(counter++, id);
 
             T document = initialize();
-            config = new ServerProcessing().getDateBaseFromXML(Person.class);
-            Person author = config.getPersonList().get(RANDOM.nextInt(config.getPersonList().size()));
+            config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
+            Person author = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
             Date date = new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong()));
             //Заполнение общих полей документа
             document.setId(id);

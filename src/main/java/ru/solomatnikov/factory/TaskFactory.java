@@ -2,7 +2,6 @@ package ru.solomatnikov.factory;
 
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.document.Task;
-
 import java.io.IOException;
 import java.util.Date;
 
