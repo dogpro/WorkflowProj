@@ -1,8 +1,7 @@
 package ru.solomatnikov.DAO;
 
-import ru.solomatnikov.exception.DBCreateExitsException;
-import ru.solomatnikov.exception.DBDeleteExitsException;
-import ru.solomatnikov.exception.DBUpdateExitsException;
+import ru.solomatnikov.exception.DBSelectByIdExitsException;
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.model.Staff.Department;
 
 
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentDAO extends DataBaseController<Department, Long> {
+public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStatement> {
 
     private static final String SELECT_ALL_DEPARTMENST = "SELECT * FROM Departments";
     private static final String UPDATE_DEPARTMENT = "UPDATE Departments SET FULLNAME = ?, SHORTNAME = ?, " +
@@ -20,71 +19,51 @@ public class DepartmentDAO extends DataBaseController<Department, Long> {
     private static final String DELETE_DEPARTMENT = "DELETE FROM Departments WHERE id =";
     private static final String CREATE_DEPARTMENT = "INSERT INTO Departments (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
             " VALUES (?, ?, ?, ?)";
+    private static final String SELECT_BY_ID = "SELECT * FROM Departments WHERE id =";
 
     /**
-     * Метод получения всех записей таблицы Departments
-     * @return Данные из таблицы
+     * Метод, получающий SQL код для обновления записи
+     * @return SQL обновления записи
      */
     @Override
-    protected List<Department> getAll() {
-        List<Department> departmentList = new ArrayList<>();
-        try (PreparedStatement prepareStatement = getPrepareStatement(SELECT_ALL_DEPARTMENST)) {
-            ResultSet resultSet = prepareStatement.executeQuery();
-            while (resultSet.next()) {
-                Department department = new Department();
-                department.setId(resultSet.getLong(1));
-                department.setFullName(resultSet.getString(2));
-                departmentList.add(department);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return departmentList;
+    protected String getUpdateSQL() {
+        return UPDATE_DEPARTMENT;
     }
 
     /**
-     * Метод обновления запии в таблице
-     * @param entity Обновляемый обьект
-     * @throws DBUpdateExitsException Иключение на случай ошибки с обновлением
+     * Метод, получающий SQL код для удаления записи
+     * @return SQL удаления записи
      */
     @Override
-    protected void update(Department entity) throws DBUpdateExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(UPDATE_DEPARTMENT)) {
-            setData(prepareStatement, entity);
-            prepareStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DBUpdateExitsException("Ошибка при обновлении записи");
-        }
+    protected String getDeleteSQL() {
+        return DELETE_DEPARTMENT;
     }
 
     /**
-     * Метод создания записи в таблице
-     * @param entity Создаваемый объект
-     * @throws DBCreateExitsException Иключение на случай ошибки с обновлением
+     * Метод, получающий SQL код для создания записи
+     * @return SQL создания записи
      */
     @Override
-    protected void create(Department entity) throws DBCreateExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(CREATE_DEPARTMENT)) {
-            setData(prepareStatement, entity);
-            prepareStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DBCreateExitsException("Ошибка при создании записи");
-        }
+    protected String getCreateSQL() {
+        return CREATE_DEPARTMENT;
     }
 
     /**
-     * Метод удаления записи из таблицы
-     * @param id Уникальный идентификатор
-     * @throws DBDeleteExitsException Искулючение на случай ошибки с удалением
+     * Метод, получающий SQL код для чтения записей
+     * @return SQL чтения записей
      */
     @Override
-    protected void delete(Long id) throws DBDeleteExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(DELETE_DEPARTMENT + id)) {
-            prepareStatement.executeQuery();
-        } catch (SQLException e) {
-            throw new DBDeleteExitsException("Ошибка при удалении записи");
-        }
+    protected String getSelectSQL() {
+        return SELECT_ALL_DEPARTMENST;
+    }
+
+    /**
+     * Метод, получающий SQL код для чтения записей по ID
+     * @return SQL чтения записей по ID
+     */
+    @Override
+    protected String getSelectByIDSQL() {
+        return SELECT_BY_ID;
     }
 
     /**
@@ -93,10 +72,28 @@ public class DepartmentDAO extends DataBaseController<Department, Long> {
      * @param entity Объект
      * @throws SQLException Исключение на случай ошибки с подключением
      */
-    void setData(PreparedStatement prepareStatement, Department entity) throws SQLException {
+    @Override
+    protected void getSetData(PreparedStatement prepareStatement, Department entity) throws SQLException {
         prepareStatement.setString(1, entity.getFullName());
         prepareStatement.setString(2, entity.getShortName());
         prepareStatement.setString(3, entity.getManager());
         prepareStatement.setString(4, entity.getCallPhone());
+    }
+
+    /**
+     * Метод для создания объекта по результату запроса
+     * @param objectList Лист объектов
+     * @param resultSet Результат выполнения запроса
+     * @return Объект
+     * @throws SQLException Исключение на случай ошибки в выполнении запроса
+     */
+    @Override
+    protected Department getParsData(List<Department> objectList, ResultSet resultSet) throws SQLException {
+        Department department = new Department();
+        department.setFullName(resultSet.getString(1));
+        department.setShortName(resultSet.getString(2));
+        department.setManager(resultSet.getString(3));
+        department.setCallPhone(resultSet.getString(4));
+        return department;
     }
 }

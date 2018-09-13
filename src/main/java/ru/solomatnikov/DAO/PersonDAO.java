@@ -1,90 +1,64 @@
 package ru.solomatnikov.DAO;
 
-import ru.solomatnikov.exception.DBCreateExitsException;
-import ru.solomatnikov.exception.DBDeleteExitsException;
-import ru.solomatnikov.exception.DBUpdateExitsException;
 import ru.solomatnikov.model.Staff.Person;
-import ru.solomatnikov.utils.DateUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class PersonDAO extends DataBaseController<Person, Long> {
+public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
     private static final String SELECT_ALL_USERS = "SELECT * FROM Staff";
     private static final String UPDATE_USER = "UPDATE Staff SET SURNAME = ?, FIRSTNAME = ?, " +
             "PATRONYMIC = ?, BIRTHDAY = ?, POST = ?, PHOTO = ?";
     private static final String DELETE_USER = "DELETE FROM Staff WHERE id =";
     private static final String CREATE_USER = "INSERT INTO Staff( SURNAME, FIRSTNAME, " +
             "PATRONYMIC, BIRTHDAY, POST, PHOTO) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_BY_ID = "SELECT * FROM Staff WHERE id =";
 
     /**
-     * Метод получения весех записей таблицы Staff
-     * @return Данные из таблицы
+     * Метод, получающий SQL код для обновления записи
+     * @return SQL обновления записи
      */
     @Override
-    public List<Person> getAll() {
-        List<Person> personList = new ArrayList<>();
-        try (PreparedStatement prepareStatement = getPrepareStatement(SELECT_ALL_USERS)) {
-            ResultSet resultSet = prepareStatement.executeQuery();
-            while (resultSet.next()) {
-                Person person = new Person();
-                person.setId(resultSet.getLong(1));
-                person.setLastName(resultSet.getString(2));
-                personList.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return personList;
+    protected String getUpdateSQL() {
+        return UPDATE_USER;
     }
 
     /**
-     * Метод обновления запии в таблице
-     * @param entity Обновляемый обьект
-     * @throws DBUpdateExitsException Иключение на случай ошибки с обновлением
+     * Метод, получающий SQL код для удаления записи
+     * @return SQL удаления записи
      */
     @Override
-    protected void update(Person entity) throws DBUpdateExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(UPDATE_USER)) {
-            setData(prepareStatement, entity);
-            prepareStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DBUpdateExitsException("Ошибка при обновлении записи");
-        }
+    protected String getDeleteSQL() {
+        return DELETE_USER;
     }
 
     /**
-     * Метод создания записи в таблице
-     * @param entity Создаваемый объект
-     * @throws DBCreateExitsException Иключение на случай ошибки с обновлением
+     * Метод, получающий SQL код для создания записи
+     * @return SQL создания записи
      */
     @Override
-    protected void create(Person entity) throws DBCreateExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(CREATE_USER)) {
-            setData(prepareStatement, entity);
-            prepareStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DBCreateExitsException("Ошибка при создании записи");
-        }
+    protected String getCreateSQL() {
+        return CREATE_USER;
     }
 
-
     /**
-     * Метод удаления записи из таблицы
-     * @param id Уникальный идентификатор
-     * @throws DBDeleteExitsException Искулючение на случай ошибки с удалением
+     * Метод, получающий SQL код для чтения записей
+     * @return SQL чтения записей
      */
     @Override
-    protected void delete(Long id) throws DBDeleteExitsException {
-        try (PreparedStatement prepareStatement = getPrepareStatement(DELETE_USER + id)) {
-            prepareStatement.executeQuery();
-        } catch (SQLException e) {
-            throw new DBDeleteExitsException("Ошибка при удалении записи");
-        }
+    protected String getSelectSQL() {
+        return SELECT_ALL_USERS;
+    }
+
+    /**
+     * Метод, получающий SQL код для чтения записей по ID
+     * @return SQL чтения записей по ID
+     */
+    @Override
+    protected String getSelectByIDSQL() {
+        return SELECT_BY_ID;
     }
 
     /**
@@ -93,7 +67,8 @@ public class PersonDAO extends DataBaseController<Person, Long> {
      * @param entity Объект
      * @throws SQLException Исключение на случай ошибки с подключением
      */
-    void setData(PreparedStatement prepareStatement, Person entity) throws SQLException {
+    @Override
+    protected void getSetData(PreparedStatement prepareStatement, Person entity) throws SQLException {
         prepareStatement.setString(1, entity.getSurname());
         prepareStatement.setString(2, entity.getFirstName());
         prepareStatement.setString(3, entity.getLastName());
@@ -101,5 +76,27 @@ public class PersonDAO extends DataBaseController<Person, Long> {
         prepareStatement.setString(5, entity.getPost());
         prepareStatement.setString(6, entity.getPhoto());
     }
+
+    /**
+     * Метод для создания объекта по результату запроса
+     * @param objectList Лист объектов
+     * @param resultSet Результат выполнения запроса
+     * @return Объект
+     * @throws SQLException Исключение на случай ошибки в выполнении запроса
+     */
+    @Override
+    protected Person getParsData(List<Person> objectList, ResultSet resultSet) throws SQLException {
+        Person person = new Person();
+        person.setId(resultSet.getLong(1));
+        person.setSurname(resultSet.getString(2));
+        person.setFirstName(resultSet.getString(3));
+        person.setLastName(resultSet.getString(4));
+        person.setBirthday(resultSet.getString(5));
+        person.setPost(resultSet.getString(6));
+        person.setPhoto(resultSet.getString(7));
+        return person;
+    }
+
+
 }
 

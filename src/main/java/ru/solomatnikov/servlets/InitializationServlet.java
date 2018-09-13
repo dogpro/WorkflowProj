@@ -26,16 +26,16 @@ public class InitializationServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-////            DBTablesCreator.createTableStaff();
-////            DBTablesCreator.createTableDepartments();
-////            DBTablesCreator.createTableOrganizations();
-////        } catch (DBTableЕxistsException | SQLException | IOException | DBCreateExitsException ex) {
-////            try {
-////                throw new DBTableЕxistsException("Ошибка при создании таблицы");
-////            } catch (DBTableЕxistsException e) {
-////                e.printStackTrace();
-////            }
-////        }
+        try {
+            DBTablesCreator.createTableStaff();
+            DBTablesCreator.createTableDepartments();
+            DBTablesCreator.createTableOrganizations();
+        } catch (DBTableЕxistsException | SQLException | IOException | DBCreateExitsException ex) {
+            try {
+                throw new DBTableЕxistsException("Ошибка при создании таблицы");
+            } catch (DBTableЕxistsException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

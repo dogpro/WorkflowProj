@@ -8,7 +8,10 @@ import ru.solomatnikov.model.Staff.Organization;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.service.ServerProcessing;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,15 +46,9 @@ public class DBTablesCreator {
      * @throws DBTableЕxistsException Исключение на сучай ошибки создания таблицы
      */
     public static void createTableDepartments() throws SQLException, DBTableЕxistsException, DBCreateExitsException, IOException {
-        if (isTableExist(DataBaseController.getConnection(), "Departments")) {
-            PreparedStatement preparedStatement = DataBaseController.getConnection().prepareStatement("CREATE TABLE Departments" +
-                    "(FULLNAME VARCHAR(40)," +
-                    "SHORTNAME VARCHAR(40)," +
-                    "MANAGER VARCHAR(40)," +
-                    "CALLPHONE VARCHAR(40))");
-
+        if (isTableExist(AbstractDAO.getConnection(), "Departments")) {
+            PreparedStatement preparedStatement = AbstractDAO.getConnection().prepareStatement(getSql("SQL/CreateTableDepartment.sql"));
             preparedStatement.execute();
-
             InsertDataInDepartmentsTable();
         }
     }
@@ -63,15 +60,8 @@ public class DBTablesCreator {
      * @throws DBTableЕxistsException Исключение на сучай ошибки создания таблицы
      */
     public static void createTableStaff() throws SQLException, DBTableЕxistsException, IOException, DBCreateExitsException {
-        if (isTableExist(DataBaseController.getConnection(), "Staff")) {
-            PreparedStatement preparedStatement = DataBaseController.getConnection().prepareStatement("CREATE TABLE Staff" +
-                    "(SURNAME VARCHAR(40)," +
-                    "FIRSTNAME VARCHAR(40)," +
-                    "PATRONYMIC VARCHAR(40)," +
-                    "BIRTHDAY VARCHAR(40)," +
-                    "POST VARCHAR(40)," +
-                    "PHOTO VARCHAR(40))");
-
+        if (isTableExist(AbstractDAO.getConnection(), "Staff")) {
+            PreparedStatement preparedStatement = AbstractDAO.getConnection().prepareStatement(getSql("SQL/CreateTableStaff.sql"));
             preparedStatement.execute();
             InsertDataInStaffTable();
         }
@@ -84,13 +74,8 @@ public class DBTablesCreator {
      * @throws DBTableЕxistsException Исключение на сучай ошибки создания таблицы
      */
     public static void createTableOrganizations() throws SQLException, DBTableЕxistsException, DBCreateExitsException, IOException {
-        if (isTableExist(DataBaseController.getConnection(), "Organizations")) {
-            PreparedStatement preparedStatement = DataBaseController.getConnection().prepareStatement("CREATE TABLE Organizations" +
-                    "(FULLNAME VARCHAR(40)," +
-                    "SHORTNAME VARCHAR(40)," +
-                    "MANAGER VARCHAR(40)," +
-                    "CALLPHONE VARCHAR(40))");
-
+        if (isTableExist(AbstractDAO.getConnection(), "Organizations")) {
+            PreparedStatement preparedStatement = AbstractDAO.getConnection().prepareStatement(getSql("SQL/CreateTableOrganization.sql"));
             preparedStatement.execute();
             InsertDataInOrganizationsTable();
         }
@@ -103,63 +88,63 @@ public class DBTablesCreator {
      * @throws IOException            Исключение на сучай ошибки подключения
      */
     private static void InsertDataInStaffTable() throws DBCreateExitsException, IOException {
-        String sql = "INSERT INTO Staff( SURNAME, " +
-                "FIRSTNAME,PATRONYMIC, BIRTHDAY, POST, PHOTO) VALUES (?, ?, ?, ?, ?, ?)";
 
         Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
         for (Person person : config.getAny()) {
-
-            try (PreparedStatement prepareStatement = DataBaseController.getConnection().prepareStatement(sql)) {
-                prepareStatement.setString(1, person.getId().toString());
-                prepareStatement.setString(2, person.getSurname());
-                prepareStatement.setString(3, person.getFirstName());
-                prepareStatement.setString(4, person.getLastName());
-                prepareStatement.setString(5, person.getPost());
-                prepareStatement.executeUpdate();
-
-                prepareStatement.executeUpdate();
-            } catch (SQLException e) {
+            try{
+            PersonDAO personDAO = new PersonDAO();
+            personDAO.create(person);
+            } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Staff");
             }
         }
     }
 
+    /**
+     * Метод для заполнения данными таблицы депортаментов
+     * @throws DBCreateExitsException Исключение на сучай ошибки создания таблицы
+     * @throws IOException Исключение на сучай ошибки подключения
+     */
     private static void InsertDataInDepartmentsTable() throws DBCreateExitsException, IOException {
-        String sql = "INSERT INTO Departments (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
-                " VALUES (?, ?, ?, ?)";
 
         Config<Department> config = new ServerProcessing().getDataInDBFromXML("Department.xml");
         for (Department department : config.getAny()) {
-            try (PreparedStatement prepareStatement = DataBaseController.getConnection().prepareStatement(sql)) {
-                prepareStatement.setString(1, department.getFullName());
-                prepareStatement.setString(2, department.getShortName());
-                prepareStatement.setString(3, department.getManager());
-                prepareStatement.setString(4, department.getCallPhone());
-
-                prepareStatement.executeUpdate();
-            } catch (SQLException e) {
+            try{
+                DepartmentDAO departmentDAO = new DepartmentDAO();
+                departmentDAO.create(department);
+            } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Department");
             }
         }
     }
 
+    /**
+     * Метод для заполнения данными таблицы организаций
+     * @throws DBCreateExitsException Исключение на случай ошибки в создаии документа
+     * @throws IOException Исключение на случай ошибки в работе с файлом
+     */
     private static void InsertDataInOrganizationsTable() throws DBCreateExitsException, IOException {
-        String sql = "INSERT INTO Organizations (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
-                " VALUES (?, ?, ?, ?)";
 
         Config<Organization> config = new ServerProcessing().getDataInDBFromXML("Organization.xml");
         for (Organization organization : config.getAny()) {
-            try (PreparedStatement prepareStatement = DataBaseController.getConnection().prepareStatement(sql)) {
-                prepareStatement.setString(1, organization.getFullName());
-                prepareStatement.setString(2, organization.getShortName());
-                prepareStatement.setString(3, organization.getManager());
-                prepareStatement.setString(4, organization.getCallPhone());
-
-                prepareStatement.executeUpdate();
-            } catch (SQLException e) {
+            try{
+                OrganizationDAO organizationDAO = new OrganizationDAO();
+                organizationDAO.create(organization);
+            } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Organization");
             }
         }
+    }
+
+    private static String getSql(String fileName) throws IOException {
+        String str;
+        StringBuffer stringBuffer = new StringBuffer();
+        InputStream inputStream = DBTablesCreator.class.getClassLoader().getResourceAsStream(fileName);
+        BufferedReader reader = new BufferedReader( new InputStreamReader(inputStream));
+        while ((str = reader.readLine()) != null) {
+            stringBuffer.append(str).append("\n");
+        }
+        return String.valueOf(stringBuffer);
     }
 }
 
