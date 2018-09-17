@@ -21,7 +21,6 @@ abstract class AbstractDAO<E, K, P> {
     protected abstract String getDeleteSQL();
     protected abstract String getCreateSQL();
     protected abstract String getSelectSQL();
-    protected abstract String getSelectByIDSQL();
 
     protected abstract void getSetData(P prepareStatement, E entity) throws SQLException;
     protected abstract E getParsData(List<E> objectList, ResultSet resultSet) throws SQLException;
@@ -30,12 +29,12 @@ abstract class AbstractDAO<E, K, P> {
      * Метод получения весех записей таблицы Staff
      * @return Данные из таблицы
      */
-    protected List<E> select() throws DBSelectExitsException{
+    public List<E> select() throws DBSelectExitsException{
         return getSelectQuery(getSelectSQL());
     }
 
-    protected List<E> getById(K id) throws DBSelectByIdExitsException, DBSelectExitsException {
-        return getSelectQuery(getSelectByIDSQL() + id);
+    public List<E> getById(K id) throws DBSelectByIdExitsException, DBSelectExitsException {
+        return getSelectQuery(getSelectSQL() + " WHERE id = " + id);
     }
 
     /**
@@ -43,7 +42,7 @@ abstract class AbstractDAO<E, K, P> {
      * @param entity Обновляемый обьект
      * @throws DBUpdateExitsException Иключение на случай ошибки с обновлением
      */
-    protected void update(E entity) throws DBUpdateExitsException{
+    public void update(E entity) throws DBUpdateExitsException{
         try (PreparedStatement prepareStatement = getPrepareStatement(getUpdateSQL())) {
             getSetData((P) prepareStatement, entity);
             prepareStatement.executeUpdate();
@@ -57,7 +56,7 @@ abstract class AbstractDAO<E, K, P> {
      * @param entity Создаваемый объект
      * @throws DBCreateExitsException Иключение на случай ошибки с обновлением
      */
-    protected void create(E entity) throws DBCreateExitsException{
+    public void create(E entity) throws DBCreateExitsException{
         try (PreparedStatement prepareStatement = getPrepareStatement(getCreateSQL())) {
             getSetData((P) prepareStatement, entity);
             prepareStatement.executeUpdate();
@@ -71,7 +70,7 @@ abstract class AbstractDAO<E, K, P> {
      * @param id Уникальный идентификатор
      * @throws DBDeleteExitsException Искулючение на случай ошибки с удалением
      */
-    protected void delete(K id) throws DBDeleteExitsException{
+    public void delete(K id) throws DBDeleteExitsException{
         try (PreparedStatement prepareStatement = getPrepareStatement(getDeleteSQL() + id)) {
             prepareStatement.executeQuery();
         } catch (SQLException e) {

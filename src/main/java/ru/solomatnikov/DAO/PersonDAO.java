@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
-    private static final String SELECT_ALL_USERS = "SELECT * FROM Staff";
-    private static final String UPDATE_USER = "UPDATE Staff SET SURNAME = ?, FIRSTNAME = ?, " +
+    private static final String SELECT_ALL_USERS = "SELECT * FROM Staff10";
+    private static final String UPDATE_USER = "UPDATE Staff10 SET ID = ?, SURNAME = ?, FIRSTNAME = ?, " +
             "PATRONYMIC = ?, BIRTHDAY = ?, POST = ?, PHOTO = ?";
-    private static final String DELETE_USER = "DELETE FROM Staff WHERE id =";
-    private static final String CREATE_USER = "INSERT INTO Staff( SURNAME, FIRSTNAME, " +
-            "PATRONYMIC, BIRTHDAY, POST, PHOTO) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM Staff WHERE id =";
+    private static final String DELETE_USER = "DELETE FROM Staff10 WHERE id =";
+    private static final String CREATE_USER = "INSERT INTO Staff10(ID, SURNAME, FIRSTNAME, " +
+            "PATRONYMIC, BIRTHDAY, POST, PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * Метод, получающий SQL код для обновления записи
@@ -53,15 +52,6 @@ public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
     }
 
     /**
-     * Метод, получающий SQL код для чтения записей по ID
-     * @return SQL чтения записей по ID
-     */
-    @Override
-    protected String getSelectByIDSQL() {
-        return SELECT_BY_ID;
-    }
-
-    /**
      * Метод распределяющий параметры запроса
      * @param prepareStatement Подключение запроса
      * @param entity Объект
@@ -69,12 +59,13 @@ public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
      */
     @Override
     protected void getSetData(PreparedStatement prepareStatement, Person entity) throws SQLException {
-        prepareStatement.setString(1, entity.getSurname());
-        prepareStatement.setString(2, entity.getFirstName());
-        prepareStatement.setString(3, entity.getLastName());
-        prepareStatement.setString(4, entity.getBirthday());
-        prepareStatement.setString(5, entity.getPost());
-        prepareStatement.setString(6, entity.getPhoto());
+        prepareStatement.setString(1,entity.getId().toString());
+        prepareStatement.setString(2, entity.getSurname());
+        prepareStatement.setString(3, entity.getFirstName());
+        prepareStatement.setString(4, entity.getLastName());
+        prepareStatement.setString(5, entity.getBirthday());
+        prepareStatement.setString(6, entity.getPost());
+        prepareStatement.setString(7, entity.getPhoto());
     }
 
     /**
@@ -96,7 +87,5 @@ public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
         person.setPhoto(resultSet.getString(7));
         return person;
     }
-
-
 }
 

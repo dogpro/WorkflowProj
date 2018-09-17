@@ -1,5 +1,6 @@
 package ru.solomatnikov.servlets;
 
+import ru.solomatnikov.controller.EmployeesController;
 import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.service.ServerProcessing;
 
@@ -15,7 +16,7 @@ import java.util.TreeSet;
 
 public class AllDocumentsAuthorOnGetServlet extends HttpServlet {
 
-    public static List<Document> documents = new ArrayList<>();
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +38,7 @@ public class AllDocumentsAuthorOnGetServlet extends HttpServlet {
         Long id = Long.valueOf(request.getParameter("id"));
         //Получение списка документов одного автора по ID
         TreeSet<Document> documents = serverProcessing.getDocumentsByAuthor(id);
-        AllDocumentsAuthorOnGetServlet.documents = new ArrayList<>(documents);
+        EmployeesController.documents = new ArrayList<>(documents);
 
         request.setAttribute("document", documents);
         request.getRequestDispatcher("/documents.jsp").forward(request, response);

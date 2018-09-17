@@ -1,5 +1,4 @@
 package ru.solomatnikov.DAO;
-
 import ru.solomatnikov.exception.DBCreateExitsException;
 import ru.solomatnikov.exception.DBTableЕxistsException;
 import ru.solomatnikov.factory.Config;
@@ -60,7 +59,7 @@ public class DBTablesCreator {
      * @throws DBTableЕxistsException Исключение на сучай ошибки создания таблицы
      */
     public static void createTableStaff() throws SQLException, DBTableЕxistsException, IOException, DBCreateExitsException {
-        if (isTableExist(AbstractDAO.getConnection(), "Staff")) {
+        if (!isTableExist(AbstractDAO.getConnection(), "Staff")) {
             PreparedStatement preparedStatement = AbstractDAO.getConnection().prepareStatement(getSql("SQL/CreateTableStaff.sql"));
             preparedStatement.execute();
             InsertDataInStaffTable();
@@ -87,13 +86,13 @@ public class DBTablesCreator {
      * @throws DBCreateExitsException Исключение на сучай ошибки создания таблицы
      * @throws IOException            Исключение на сучай ошибки подключения
      */
-    private static void InsertDataInStaffTable() throws DBCreateExitsException, IOException {
+    public static void InsertDataInStaffTable() throws DBCreateExitsException, IOException {
 
         Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
         for (Person person : config.getAny()) {
             try{
-            PersonDAO personDAO = new PersonDAO();
-            personDAO.create(person);
+                PersonDAO personDAO = new PersonDAO();
+                personDAO.create(person);
             } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Staff");
             }

@@ -19,7 +19,6 @@ public class OrganizationDAO extends AbstractDAO<Organization, Long, PreparedSta
     private static final String DELETE_ORGANIZATION = "DELETE FROM Organizations WHERE id =";
     private static final String CREATE_ORGANIZATION = "INSERT INTO Organizations (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
             " VALUES (?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM Organizations WHERE id =";
 
     /**
      * Метод, получающий SQL код для обновления записи
@@ -55,21 +54,6 @@ public class OrganizationDAO extends AbstractDAO<Organization, Long, PreparedSta
     @Override
     protected String getSelectSQL() {
         return SELECT_ALL_ORGANIZATIONS;
-    }
-
-    /**
-     * Метод, получающий SQL код для чтения записей по ID
-     * @return SQL чтения записей по ID
-     */
-    @Override
-    protected String getSelectByIDSQL() {
-        return SELECT_BY_ID;
-    }
-
-
-    @Override
-    protected List<Organization> getById(Long id) throws DBSelectByIdExitsException {
-        return null;
     }
 
     /**

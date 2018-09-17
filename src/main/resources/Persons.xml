@@ -5,7 +5,7 @@
         <firstName>Ivan</firstName>
         <surname>Ivanov</surname>
         <lastName>Ivanovich</lastName>
-        <birthday>11.01.1989</birthday>
+        <birthday>1989.01.11</birthday>
         <post>post1</post>
         <photo>file</photo>
     </person>
@@ -14,7 +14,7 @@
         <firstName>Andrew</firstName>
         <surname>Andreew</surname>
         <lastName>Andreewich</lastName>
-        <birthday>11.01.1989</birthday>
+        <birthday>1989.01.11</birthday>
         <post>post2</post>
         <photo>file</photo>
     </person>
@@ -23,7 +23,7 @@
         <firstName>Vlad</firstName>
         <surname>Vladov</surname>
         <lastName>Vladovich</lastName>
-        <birthday>11.01.19895</birthday>
+        <birthday>1969.01.11</birthday>
         <post>post3</post>
         <photo>file</photo>
     </person>
@@ -32,7 +32,7 @@
         <firstName>Oleg</firstName>
         <surname>Olegov</surname>
         <lastName>Olegovich</lastName>
-        <birthday>11.01.1989</birthday>
+        <birthday>1989.01.11</birthday>
         <post>post4</post>
         <photo>file</photo>
     </person>

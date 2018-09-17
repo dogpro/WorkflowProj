@@ -19,7 +19,6 @@ public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStateme
     private static final String DELETE_DEPARTMENT = "DELETE FROM Departments WHERE id =";
     private static final String CREATE_DEPARTMENT = "INSERT INTO Departments (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
             " VALUES (?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM Departments WHERE id =";
 
     /**
      * Метод, получающий SQL код для обновления записи
@@ -55,15 +54,6 @@ public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStateme
     @Override
     protected String getSelectSQL() {
         return SELECT_ALL_DEPARTMENST;
-    }
-
-    /**
-     * Метод, получающий SQL код для чтения записей по ID
-     * @return SQL чтения записей по ID
-     */
-    @Override
-    protected String getSelectByIDSQL() {
-        return SELECT_BY_ID;
     }
 
     /**

@@ -41,4 +41,24 @@
         <servlet-name>DocumentField</servlet-name>
         <url-pattern>/DocumentField</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.CreateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>jQueryServlet</servlet-name>
+        <servlet-class>ru.solomatnikov.servlets.CreateUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jQueryServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

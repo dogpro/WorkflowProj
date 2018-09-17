@@ -5,14 +5,20 @@
         <title>Authors</title>
     </head>
     <body>
-        <table>
-            <c:forEach var="person" items="${persons}">
-                <tr class="font" style="height: 32px">
-                    <td scope="row" ><a href="http://localhost:8080/parent-project-1.0-SNAPSHOT/Documents?id=${person.id}">
-                                    ${person.surname} ${person.firstName} ${person.lastName}</a></td>
-                </tr>
-            </c:forEach>
+    <form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/createAuthor.jsp">
+        <p><input type="submit" value=" Создать нового сотруддника "></p>
+    </form>
+    <table>
+        <c:forEach var="person" items="${persons}">
+            <tr class="font" style="height: 32px">
+                <td scope="row" ><a href="http://localhost:8080/parent-project-1.0-SNAPSHOT/ecm/persons/documents/${person.id}">
+                        ${person.surname} ${person.firstName} ${person.lastName}</a></td>
+                <td><form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/ecm/persons/update/${person.id}">
+                    <p><input type="submit" value=" Открыть карточку "></p>
+                </form></td>
+            </tr>
+        </c:forEach>
 
-        </table>
+    </table>
     </body>
 </html>

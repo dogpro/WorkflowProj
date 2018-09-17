@@ -2,6 +2,7 @@ package ru.solomatnikov.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.solomatnikov.controller.EmployeesController;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.factory.DocumentFactory;
@@ -98,7 +99,7 @@ public class ServerProcessing <T extends Staff> {
      * @return Документ
      */
     public Document getDocumentByAuthor(Long id) {
-        for (Document document : AllDocumentsAuthorOnGetServlet.documents) {
+        for (Document document : EmployeesController.documents) {
             if (document.getId().equals(id)) {
                 return document;
             }
@@ -106,4 +107,11 @@ public class ServerProcessing <T extends Staff> {
         return null;
     }
 
+    public Long getAuthorID(Long id){
+        for (Map.Entry<Long, TreeSet<Document>> entry : ServerProcessing.reportOnAuthor.entrySet()) {
+            Long key = entry.getKey();
+            if (key.equals(id)) return key;
+        }
+        return null;
+    }
 }
