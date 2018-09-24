@@ -13,12 +13,23 @@ import java.util.List;
 
 public class OrganizationDAO extends AbstractDAO<Organization, Long, PreparedStatement > {
 
+    private static OrganizationDAO instance;
+
+    OrganizationDAO(){}
+
+    public static OrganizationDAO getInstance() {
+        if (instance == null){
+            instance = new OrganizationDAO();
+        }
+        return instance;
+    }
+
     private static final String SELECT_ALL_ORGANIZATIONS = "SELECT * FROM Organizations";
-    private static final String UPDATE_ORGANIZATION = "UPDATE Organizations SET FULLNAME = ?, SHORTNAME = ?, " +
+    private static final String UPDATE_ORGANIZATION = "UPDATE Organizations SET ID = ? FULLNAME = ?, SHORTNAME = ?, " +
             "MANAGER = ?, CALLPHONE = ?";
-    private static final String DELETE_ORGANIZATION = "DELETE FROM Organizations WHERE id =";
-    private static final String CREATE_ORGANIZATION = "INSERT INTO Organizations (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
-            " VALUES (?, ?, ?, ?)";
+    private static final String DELETE_ORGANIZATION = "DELETE FROM Organizations WHERE ID =";
+    private static final String CREATE_ORGANIZATION = "INSERT INTO Organizations (ID, FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
+            " VALUES (?, ?, ?, ?, ?)";
 
     /**
      * Метод, получающий SQL код для обновления записи
@@ -64,10 +75,11 @@ public class OrganizationDAO extends AbstractDAO<Organization, Long, PreparedSta
      */
     @Override
     protected void getSetData(PreparedStatement prepareStatement, Organization entity) throws SQLException {
-        prepareStatement.setString(1, entity.getFullName());
-        prepareStatement.setString(2, entity.getShortName());
-        prepareStatement.setString(3, entity.getManager());
-        prepareStatement.setString(4, entity.getCallPhone());
+        prepareStatement.setLong(1,entity.getId());
+        prepareStatement.setString(2, entity.getFullName());
+        prepareStatement.setString(3, entity.getShortName());
+        prepareStatement.setString(4, entity.getManager());
+        prepareStatement.setString(5, entity.getCallPhone());
     }
 
     /**
@@ -80,10 +92,11 @@ public class OrganizationDAO extends AbstractDAO<Organization, Long, PreparedSta
     @Override
     protected Organization getParsData(List<Organization> objectList, ResultSet resultSet) throws SQLException {
         Organization organization = new Organization();
-        organization.setFullName(resultSet.getString(1));
-        organization.setShortName(resultSet.getString(2));
-        organization.setManager(resultSet.getString(3));
-        organization.setCallPhone(resultSet.getString(4));
+        organization.setId(resultSet.getLong(1));
+        organization.setFullName(resultSet.getString(2));
+        organization.setShortName(resultSet.getString(3));
+        organization.setManager(resultSet.getString(4));
+        organization.setCallPhone(resultSet.getString(5));
         return organization;
     }
 }

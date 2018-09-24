@@ -10,38 +10,39 @@
 <html>
 <head>
     <title></title>
+    <script src="${pageContext.request.contextPath}/js/post.js"></script>
 </head>
 <body>
 <table width=430>
-
-    <tr>
-        <td><form action="/submit" method="post">
-            <input type="submit" value=" Сохранить "></form></td>
-
-        <td><form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/ecm/persons/update/delete/">
-            <input type="submit" value=" Удалить "></form></td>
-
-        <td><form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/ecm/persons/">
-            <input type="submit" value=" Закрыть "></form></td>
-    </tr>
     <tr>
         <form>
             <c:set var="person" value="${person}"/>
+            <b>Идентификатор:</b><br>
+            <input id="id" type="text" size="40" value="${person.id}"><br>
+
             <b>Фамилия:</b><br>
-            <input name="surname" type="text" size="40" value=${person.surname}><br>
+            <input id="surname" type="text" size="40" value=${person.surname}><br>
 
             <b>Имя:</b><br>
-            <input name="firstName" type="text" size="40" value=${person.firstName}><br><br>
+            <input id="firstName" type="text" size="40" value=${person.firstName}><br><br>
 
             <b>Отчество:</b><br>
-            <input name="lastName" type="text" size="40" value=${person.lastName}><br><br>
+            <input id="lastName" type="text" size="40" value=${person.lastName}><br><br>
 
             <b>Дата рождения:</b><br>
-            <input name="birthday" type="text" size="40" value=${person.birthday}><br><br>
+            <input id="birthday" type="text" size="40" value=${person.birthday}><br><br>
 
             <b>Должность:</b><br>
-            <input name="post" type="text" size="40" value=${person.post}><br><br>
+            <input id="post" type="text" size="40" value=${person.post}><br><br>
 
+            <b>Фото:</b><br>
+            <input id="photo" type="text" size="40" value=${person.photo}><br><br>
+
+            <input id="update" type="button" value=" Сохранить " onclick="getData('/ecm/persons/update')">
+
+            <input id="delete" type="button" value=" Удалить " onclick="getData('/ecm/persons/update/delete')">
+
+            <input type="button" value=" Закрыть " onclick="location.href=back()">
         </form>
     </tr>
 </table>

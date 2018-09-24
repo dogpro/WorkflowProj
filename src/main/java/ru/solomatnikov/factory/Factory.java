@@ -1,5 +1,7 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.DAO.PersonDAO;
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.model.document.Document;
@@ -51,7 +53,7 @@ public abstract class Factory<T extends Document> {
      * @throws DocumentExistsException Исключение на случай создания документа с уже существующим идентификатором
      * @throws IOException Исключение на случай ошибки в работе с файлом
      */
-    public T getDocument() throws DocumentExistsException, IOException {
+    public T getDocument() throws DocumentExistsException, IOException, DBSelectExitsException {
         Long id = (long)RANDOM.nextInt(10)+1;
         //Проверка на уникальности ID
         if (isIdExits(id)) {
@@ -61,8 +63,9 @@ public abstract class Factory<T extends Document> {
             documentIdMap.put(counter++, id);
 
             T document = initialize();
-            config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
-            Person author = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
+            PersonDAO personDAO = PersonDAO.getInstance();
+            List<Person> personList = personDAO.select();
+            Person author = personList.get(RANDOM.nextInt(personList.size()));
             Date date = new Date(Math.abs(System.currentTimeMillis() - RANDOM.nextLong()));
             //Заполнение общих полей документа
             document.setId(id);

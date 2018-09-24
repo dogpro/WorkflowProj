@@ -6,7 +6,7 @@
     </head>
     <body>
     <form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/createAuthor.jsp">
-        <p><input type="submit" value=" Создать нового сотруддника "></p>
+        <p><input type="submit" value=" Создать нового сотруддника " onclick="getData('createAuthor/')"></p>
     </form>
     <table>
         <c:forEach var="person" items="${persons}">

@@ -3,6 +3,7 @@ package ru.solomatnikov.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.solomatnikov.controller.EmployeesController;
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.factory.DocumentFactory;
@@ -39,7 +40,7 @@ public class ServerProcessing <T extends Staff> {
      *
      * @throws IOException Исключение на случай ошибки пути к XML файлу
      */
-    public void getDocument() throws IOException {
+    public void getDocument() throws IOException, DBSelectExitsException {
         List<Class> typeDocument = Arrays.asList(Incoming.class, Outgoing.class, Task.class);
         for (int i = 0; i < 10; i++) {
             Class type = typeDocument.get(new Random().nextInt(typeDocument.size()));

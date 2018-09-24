@@ -8,11 +8,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
-    private static final String SELECT_ALL_USERS = "SELECT * FROM Staff10";
-    private static final String UPDATE_USER = "UPDATE Staff10 SET ID = ?, SURNAME = ?, FIRSTNAME = ?, " +
-            "PATRONYMIC = ?, BIRTHDAY = ?, POST = ?, PHOTO = ?";
-    private static final String DELETE_USER = "DELETE FROM Staff10 WHERE id =";
-    private static final String CREATE_USER = "INSERT INTO Staff10(ID, SURNAME, FIRSTNAME, " +
+
+    private static PersonDAO instance;
+
+    private PersonDAO(){}
+
+    public static PersonDAO getInstance() {
+        if (instance == null){
+            instance = new PersonDAO();
+        }
+        return instance;
+    }
+
+    private static final String SELECT_ALL_USERS = "SELECT * FROM Staff11";
+    private static final String UPDATE_USER = "UPDATE Staff11 SET ID = ?, SURNAME = ?, FIRSTNAME = ?, " +
+            "PATRONYMIC = ?, BIRTHDAY = ?, POST = ?, PHOTO = ? WHERE ID =";
+    private static final String DELETE_USER = "DELETE FROM Staff11 WHERE ID =";
+    private static final String CREATE_USER = "INSERT INTO Staff11(ID, SURNAME, FIRSTNAME, " +
             "PATRONYMIC, BIRTHDAY, POST, PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     /**
@@ -59,7 +71,7 @@ public class PersonDAO extends AbstractDAO<Person, Long, PreparedStatement> {
      */
     @Override
     protected void getSetData(PreparedStatement prepareStatement, Person entity) throws SQLException {
-        prepareStatement.setString(1,entity.getId().toString());
+        prepareStatement.setLong(1,entity.getId());
         prepareStatement.setString(2, entity.getSurname());
         prepareStatement.setString(3, entity.getFirstName());
         prepareStatement.setString(4, entity.getLastName());

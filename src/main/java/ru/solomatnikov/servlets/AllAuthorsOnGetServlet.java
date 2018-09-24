@@ -1,5 +1,6 @@
 package ru.solomatnikov.servlets;
 
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.service.ServerProcessing;
@@ -34,7 +35,11 @@ public class AllAuthorsOnGetServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //Генерация документов
-        serverProcessing.getDocument();
+        try {
+            serverProcessing.getDocument();
+        } catch (DBSelectExitsException e) {
+            e.printStackTrace();
+        }
         //Генерация авторов из XML файла
         Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
 

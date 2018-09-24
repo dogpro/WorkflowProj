@@ -1,26 +1,25 @@
 package ru.solomatnikov.controller;
 
 import ru.solomatnikov.DAO.PersonDAO;
+import ru.solomatnikov.exception.DBCreateExitsException;
 import ru.solomatnikov.exception.DBDeleteExitsException;
+import ru.solomatnikov.exception.DBSelectByIdExitsException;
 import ru.solomatnikov.exception.DBSelectExitsException;
+import ru.solomatnikov.exception.DBUpdateExitsException;
 import ru.solomatnikov.exception.DocumentsNullPointerException;
-import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.service.ServerProcessing;
-import ru.solomatnikov.servlets.AllDocumentsAuthorOnGetServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.DELETE;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +39,8 @@ public class EmployeesController {
     public void getAuthor(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException, DBSelectExitsException {
         //Генерация авторов из XML файла
         //Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
-        PersonDAO personDAO = new PersonDAO();
-        List<Person> personList =  personDAO.select();
+        PersonDAO personDAO = PersonDAO.getInstance();
+        List<Person> personList = personDAO.select();
         request.setAttribute("persons", personList);
         request.getRequestDispatcher("/authors.jsp").forward(request, response);
     }
@@ -49,24 +48,25 @@ public class EmployeesController {
 
     /**
      * Метод, возвращающий список документов по переданному в строку идентификатору
+     *
      * @param id Идентификатор автора
      * @return Список документов
      */
     @GET
     @Path("documents/{id}")
     public void getDocumentsByAuthor(@Context HttpServletRequest request, @Context HttpServletResponse response,
-                                    @PathParam("id") Long id) throws ServletException, IOException, DocumentsNullPointerException {
+                                     @PathParam("id") Long id) throws ServletException, IOException, DocumentsNullPointerException {
         ServerProcessing serverProcessing = new ServerProcessing();
         //Получение ID автора из URL
         //Получение списка документов одного автора по ID
         TreeSet<Document> documents = serverProcessing.getDocumentsByAuthor(id);
-        if (documents != null){
+        if (documents != null) {
             EmployeesController.documents = new ArrayList<>(documents);
 
             request.setAttribute("document", documents);
             request.getRequestDispatcher("/documents.jsp").forward(request, response);
-        } else{
-          throw new DocumentsNullPointerException("Documents not found");
+        } else {
+            throw new DocumentsNullPointerException("Documents not found");
         }
     }
 
@@ -82,23 +82,44 @@ public class EmployeesController {
     }
 
     @POST
-    public static void createPerson(){
-
+    @Consumes("application/json")
+    @Path("createAuthor/")
+    public static void createPerson(@Context HttpServletRequest request, @Context HttpServletResponse response, Person body)
+            throws DBCreateExitsException {
+        PersonDAO personDAO = PersonDAO.getInstance();
+        personDAO.create(body);
     }
 
     @GET
+    @Consumes("application/json")
     @Path("update/{id}")
-    public static void updatePerson(@Context HttpServletRequest request, @Context HttpServletResponse response, @PathParam("id") Long id) throws ServletException, IOException {
-        Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
+    public void viewPerson(@Context HttpServletRequest request, @Context HttpServletResponse response, @PathParam("id") Long id)
+            throws ServletException, IOException, DBSelectExitsException, DBSelectByIdExitsException {
 
-        request.setAttribute("person", config.getAny().get(Math.toIntExact(id-1)));
-        request.getRequestDispatcher("/viewAuthor.jsp").forward(request, response);
+        PersonDAO personDAO = PersonDAO.getInstance();
+        for(Person person : personDAO.getById(id)){
+            request.setAttribute("person", person);
+            request.getRequestDispatcher("/viewAuthor.jsp").forward(request, response);
+        }
+
     }
-//
-//    @POST
-//    public static void deletePerson(Long id) throws DBDeleteExitsException {
-//        PersonDAO personDAO = new PersonDAO();
-//        personDAO.delete(id);
-//    }
+
+    @POST
+    @Consumes("application/json")
+    @Path("update/")
+    public void updatePerson(@Context HttpServletRequest request, @Context HttpServletResponse response, Person body)
+            throws DBUpdateExitsException {
+        PersonDAO personDAO = PersonDAO.getInstance();
+        personDAO.update(body, body.getId());
+    }
+
+    @POST
+    @Consumes("application/json")
+    @Path("update/delete")
+    public void deleteUser(@Context HttpServletRequest request, @Context HttpServletResponse response, Person body)
+            throws DBDeleteExitsException {
+        PersonDAO personDAO = PersonDAO.getInstance();
+        personDAO.delete(body.getId());
+    }
 }
 

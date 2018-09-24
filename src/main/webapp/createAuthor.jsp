@@ -18,30 +18,30 @@
 <body>
 <table width=430>
     <tr>
-        <td><form action="">
-            <input type="button" value=" Сохранить " onclick="ok()"></form></td>
-
-        <td><form action="http://localhost:8080/parent-project-1.0-SNAPSHOT/authors.jsp">
-            <input type="button" onclick="history.back();" value=" Закрыть "></form></td>
-    </tr>
-    <tr>
         <form>
+            <b>Идентификатор:</b><br>
+            <input id="id" type="text" size="40"><br>
+
             <b>Фамилия:</b><br>
-            <input type="text" size="40" id="surname"><br>
+            <input id="surname" type="text" size="40"><br>
 
             <b>Имя:</b><br>
-            <input type="text" size="40"><br><br>
+            <input id="firstName" type="text" size="40"><br><br>
 
             <b>Отчество:</b><br>
-            <input type="text" size="40"><br><br>
+            <input id="lastName" type="text" size="40"><br><br>
 
             <b>Дата рождения:</b><br>
-            <input type="text" size="40"><br><br>
+            <input id="birthday" type="text" size="40"><br><br>
 
             <b>Должность:</b><br>
-            <input type="text" size="40"><br><br>
+            <input id="post" type="text" size="40"><br><br>
 
-            <span id="ajaxCreateUserServletResponse"></span>
+            <b>Фото:</b><br>
+            <input id="photo" type="text" size="40"><br><br>
+
+            <input id="create" type="button" value=" Сохранить " onclick="getData('/ecm/persons/createAuthor/')">
+            <input type="button" value=" Закрыть " onclick="location.href=back()">
         </form>
 
     </tr>

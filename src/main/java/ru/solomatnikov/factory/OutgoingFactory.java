@@ -1,10 +1,13 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.DAO.PersonDAO;
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.model.document.Outgoing;
 
 import java.io.IOException;
+import java.util.List;
 
 public class OutgoingFactory extends Factory<Outgoing> {
 
@@ -15,10 +18,12 @@ public class OutgoingFactory extends Factory<Outgoing> {
      * @throws IOException Исключение на случай ошибки в работе с файлом
      */
     @Override
-    public Outgoing getDocument() throws DocumentExistsException, IOException {
+    public Outgoing getDocument() throws DocumentExistsException, IOException, DBSelectExitsException {
         Outgoing document = super.getDocument();
-        Person deliveryName = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
-        Person addresseeName = config.getAny().get(RANDOM.nextInt(config.getAny().size()));
+        PersonDAO personDAO = PersonDAO.getInstance();
+        List<Person> personList = personDAO.select();
+        Person deliveryName = personList.get(RANDOM.nextInt(personList.size()));
+        Person addresseeName = personList.get(RANDOM.nextInt(personList.size()));
 
         //Создание объекта Исходящие заполнение полей объекта
         document.setName("Исходящий документ");

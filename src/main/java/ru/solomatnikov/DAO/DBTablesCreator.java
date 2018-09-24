@@ -1,5 +1,7 @@
 package ru.solomatnikov.DAO;
+import ru.solomatnikov.controller.MyApplication;
 import ru.solomatnikov.exception.DBCreateExitsException;
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DBTableЕxistsException;
 import ru.solomatnikov.factory.Config;
 import ru.solomatnikov.model.Staff.Department;
@@ -7,6 +9,7 @@ import ru.solomatnikov.model.Staff.Organization;
 import ru.solomatnikov.model.Staff.Person;
 import ru.solomatnikov.service.ServerProcessing;
 
+import javax.ejb.Singleton;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +20,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBTablesCreator {
+
+    private static DBTablesCreator instance;
+
+    private DBTablesCreator(){}
+
+    public static DBTablesCreator getInstance() {
+        if (instance == null){
+            instance = new DBTablesCreator();
+        }
+        return instance;
+    }
 
     /**
      * Метод, проверяющий наличие таблицы в базе данных
@@ -59,7 +73,7 @@ public class DBTablesCreator {
      * @throws DBTableЕxistsException Исключение на сучай ошибки создания таблицы
      */
     public static void createTableStaff() throws SQLException, DBTableЕxistsException, IOException, DBCreateExitsException {
-        if (!isTableExist(AbstractDAO.getConnection(), "Staff")) {
+        if (isTableExist(AbstractDAO.getConnection(), "Staff")) {
             PreparedStatement preparedStatement = AbstractDAO.getConnection().prepareStatement(getSql("SQL/CreateTableStaff.sql"));
             preparedStatement.execute();
             InsertDataInStaffTable();
@@ -91,7 +105,7 @@ public class DBTablesCreator {
         Config<Person> config = new ServerProcessing().getDataInDBFromXML("Persons.xml");
         for (Person person : config.getAny()) {
             try{
-                PersonDAO personDAO = new PersonDAO();
+                PersonDAO personDAO = PersonDAO.getInstance();
                 personDAO.create(person);
             } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Staff");
@@ -109,7 +123,7 @@ public class DBTablesCreator {
         Config<Department> config = new ServerProcessing().getDataInDBFromXML("Department.xml");
         for (Department department : config.getAny()) {
             try{
-                DepartmentDAO departmentDAO = new DepartmentDAO();
+                DepartmentDAO departmentDAO = DepartmentDAO.getInstance();
                 departmentDAO.create(department);
             } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Department");
@@ -127,7 +141,7 @@ public class DBTablesCreator {
         Config<Organization> config = new ServerProcessing().getDataInDBFromXML("Organization.xml");
         for (Organization organization : config.getAny()) {
             try{
-                OrganizationDAO organizationDAO = new OrganizationDAO();
+                OrganizationDAO organizationDAO = OrganizationDAO.getInstance();
                 organizationDAO.create(organization);
             } catch (DBCreateExitsException e) {
                 throw new DBCreateExitsException("Ошибка при заполнении таблицы Organization");

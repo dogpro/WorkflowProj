@@ -34,7 +34,7 @@ abstract class AbstractDAO<E, K, P> {
     }
 
     public List<E> getById(K id) throws DBSelectByIdExitsException, DBSelectExitsException {
-        return getSelectQuery(getSelectSQL() + " WHERE id = " + id);
+        return getSelectQuery(getSelectSQL() + " WHERE ID = " + id);
     }
 
     /**
@@ -42,8 +42,8 @@ abstract class AbstractDAO<E, K, P> {
      * @param entity Обновляемый обьект
      * @throws DBUpdateExitsException Иключение на случай ошибки с обновлением
      */
-    public void update(E entity) throws DBUpdateExitsException{
-        try (PreparedStatement prepareStatement = getPrepareStatement(getUpdateSQL())) {
+    public void update(E entity, K id) throws DBUpdateExitsException{
+        try (PreparedStatement prepareStatement = getPrepareStatement(getUpdateSQL() + id)) {
             getSetData((P) prepareStatement, entity);
             prepareStatement.executeUpdate();
         } catch (SQLException e) {
@@ -72,7 +72,7 @@ abstract class AbstractDAO<E, K, P> {
      */
     public void delete(K id) throws DBDeleteExitsException{
         try (PreparedStatement prepareStatement = getPrepareStatement(getDeleteSQL() + id)) {
-            prepareStatement.executeQuery();
+            prepareStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DBDeleteExitsException("Ошибка при удалении записи");
         }

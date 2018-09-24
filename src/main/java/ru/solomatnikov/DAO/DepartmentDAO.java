@@ -13,12 +13,23 @@ import java.util.List;
 
 public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStatement> {
 
+    private static DepartmentDAO instance;
+
+    DepartmentDAO(){}
+
+    public static DepartmentDAO getInstance() {
+        if (instance == null){
+            instance = new DepartmentDAO();
+        }
+        return instance;
+    }
+
     private static final String SELECT_ALL_DEPARTMENST = "SELECT * FROM Departments";
-    private static final String UPDATE_DEPARTMENT = "UPDATE Departments SET FULLNAME = ?, SHORTNAME = ?, " +
+    private static final String UPDATE_DEPARTMENT = "UPDATE Departments SET ID = ?, FULLNAME = ?, SHORTNAME = ?, " +
             "MANAGER = ?, CALLPHONE = ?";
-    private static final String DELETE_DEPARTMENT = "DELETE FROM Departments WHERE id =";
-    private static final String CREATE_DEPARTMENT = "INSERT INTO Departments (FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
-            " VALUES (?, ?, ?, ?)";
+    private static final String DELETE_DEPARTMENT = "DELETE FROM Departments WHERE ID =";
+    private static final String CREATE_DEPARTMENT = "INSERT INTO Departments (ID, FULLNAME, SHORTNAME, MANAGER, CALLPHONE)" +
+            " VALUES (?, ?, ?, ?, ?)";
 
     /**
      * Метод, получающий SQL код для обновления записи
@@ -64,10 +75,11 @@ public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStateme
      */
     @Override
     protected void getSetData(PreparedStatement prepareStatement, Department entity) throws SQLException {
-        prepareStatement.setString(1, entity.getFullName());
-        prepareStatement.setString(2, entity.getShortName());
-        prepareStatement.setString(3, entity.getManager());
-        prepareStatement.setString(4, entity.getCallPhone());
+        prepareStatement.setLong(1,entity.getId());
+        prepareStatement.setString(2, entity.getFullName());
+        prepareStatement.setString(3, entity.getShortName());
+        prepareStatement.setString(4, entity.getManager());
+        prepareStatement.setString(5, entity.getCallPhone());
     }
 
     /**
@@ -80,10 +92,11 @@ public class DepartmentDAO extends AbstractDAO<Department, Long, PreparedStateme
     @Override
     protected Department getParsData(List<Department> objectList, ResultSet resultSet) throws SQLException {
         Department department = new Department();
-        department.setFullName(resultSet.getString(1));
-        department.setShortName(resultSet.getString(2));
-        department.setManager(resultSet.getString(3));
-        department.setCallPhone(resultSet.getString(4));
+        department.setId(resultSet.getLong(1));
+        department.setFullName(resultSet.getString(2));
+        department.setShortName(resultSet.getString(3));
+        department.setManager(resultSet.getString(4));
+        department.setCallPhone(resultSet.getString(5));
         return department;
     }
 }

@@ -1,5 +1,6 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.document.Document;
 import ru.solomatnikov.model.document.Incoming;
@@ -27,7 +28,7 @@ public final class DocumentFactory {
      * @throws DocumentExistsException Исключение на случай создания документа с уже существующим идентификатором
      * @throws IOException Исключение на случай ошибки в работе с файлом
      */
-    public static Document getDocument(Class clazz) throws DocumentExistsException, IOException {
+    public static Document getDocument(Class clazz) throws DocumentExistsException, IOException, DBSelectExitsException {
         return documentFactoryMap.get(clazz).getDocument();
     }
 }

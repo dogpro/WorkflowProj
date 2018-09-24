@@ -1,5 +1,6 @@
 package ru.solomatnikov.factory;
 
+import ru.solomatnikov.exception.DBSelectExitsException;
 import ru.solomatnikov.exception.DocumentExistsException;
 import ru.solomatnikov.model.document.Task;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class TaskFactory extends Factory<Task> {
      * @throws IOException Исключение на случай ошибки в работе с файлом
      */
     @Override
-    public Task getDocument() throws DocumentExistsException, IOException {
+    public Task getDocument() throws DocumentExistsException, IOException, DBSelectExitsException {
         Task document = super.getDocument();
         String executor = EXECUTORS_LIST.get(RANDOM.nextInt(EXECUTORS_LIST.size()));
         String controlAssign = CONTROL_ASSIGN_LIST.get(RANDOM.nextInt(CONTROL_ASSIGN_LIST.size()));
